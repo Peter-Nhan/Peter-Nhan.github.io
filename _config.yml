@@ -1,47 +1,3 @@
-
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@Peter-Nhan
-mmistakes /
-minimal-mistakes
-
-111
-8k
-
-    14.7k
-
-Code
-Issues 2
-Pull requests 18
-Discussions
-Actions
-Projects
-Security
-
-    Insights
-
-minimal-mistakes/_config.yml
-@SeanKilleen
-SeanKilleen Add toggle option for RSS feed visibility (#2787)
-Latest commit 7bb68ed on 6 Feb
-History
-26 contributors
-@mmistakes
-@d-Rickyy-b
-@ohadschn
-@Pradhyo
-@yihangho
-@LoveMeWithoutAll
-@YuyingWu
-@westes
-@vlajos
-@tony-ho
-@SeanKilleen
-@rriemann
-282 lines (255 sloc) 8.02 KB
 # Welcome to Jekyll!
 #
 # This config file is meant for settings that affect your entire site, values
@@ -323,19 +279,4 @@ defaults:
       read_time: true
       comments: # true
       share: true
-      related: true
-
-    © 2021 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-
+      related: true 
