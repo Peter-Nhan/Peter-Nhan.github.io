@@ -1,15 +1,8 @@
 ---
-title: "Layout: Header Video"
-header:
-  video:
-    id: XsxDH4HcOWA
-    provider: youtube
+title: "Test Link"
 categories:
   - Layout
   - Uncategorized
-tags:
-  - video
-  - layout
 toc_label: "Outline"
 ---
 
