@@ -26,3 +26,7 @@ Hopefully it will help you in a way, as it is a way for me to document things fo
 
 Many more things but with a limited lifespan need to optimise the effort. 
 But the important thing is to have fun learning/exploring and to share the lessons learnt.
+
+
+## Disclaimer
+All views expressed in this personal blog is my own and does not represent the views of my employer.
