@@ -10,6 +10,7 @@ categories:
 tags:
   - video
   - layout
+toc_label: "Outline"
 ---
 
 This post should display a **header with a responsive video**, if the theme supports it.

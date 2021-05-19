@@ -9,6 +9,7 @@ tags:
   - html
   - layout
   - title
+toc_label: "Outline"
 ---
 
 ## Title should not overflow the content area

@@ -8,6 +8,7 @@ tags:
   - edge case
   - lists
   - markup
+toc_label: "Outline"
 ---
 
 Nested and mixed lists are an interesting beast. It's a corner case to make sure that
