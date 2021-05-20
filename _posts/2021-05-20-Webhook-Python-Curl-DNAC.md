@@ -22,14 +22,14 @@ I modified the original source [GitHub cisco-en-programmability](https://github.
 Enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
 
 config.py - Change IP address 10.66.69.22 to your where you are running the Flask Python code. WEBHOOK_URL is only used by notification transmitter **test_webhook.py**
-```
+```python
 WEBHOOK_URL = 'https://10.66.69.22:5443/webhook'  # test with Flask receiver 
 WEBHOOK_USERNAME = 'username'
 WEBHOOK_PASSWORD = 'password'
 ```
 
 You can also used the curl command to emulate the notification transmitter.
-```
+```bash
 curl --insecure --user "username:password" --header "Content-Type: application/json" --request POST --data '{"Testing_Key":"Testing_Value"}' https://10.66.69.22:5443/webhook
 ```
 ![Destination](/assets/images/2021-05-20_destination.jpg)
