@@ -18,7 +18,7 @@ Flask will act as a webhook server, supporting HTTPS and authentication based we
 other servers to post notifications to.
 We will use curl command to test fire a webhook subscription at the server, also a python way using the request.post way.
 
-I modified the original source `https://github.com/cisco-en-programmability/dnacenter_webhook_receiver`
+I modified the original source [GitHub cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver)
 Enabled authentication and allow it to be reachable from external IP address of a Ubuntu VM (Ubuntu 20.04.2 LTS)
 
 
