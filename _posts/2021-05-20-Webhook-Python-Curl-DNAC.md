@@ -19,8 +19,19 @@ other servers to post notifications to.
 We will use curl command to test fire a webhook subscription at the server, also a python way using the request.post way.
 
 I modified the original source [GitHub cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver)
-Enabled authentication and allow it to be reachable from the external IP address of a Ubuntu VM (Ubuntu 20.04.2 LTS)
+Enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
 
+config.py - Change IP address 10.66.69.22 to your where you are running the Flask Python code. WEBHOOK_URL is only used by notification transmitter **test_webhook.py**
+```
+WEBHOOK_URL = 'https://10.66.69.22:5443/webhook'  # test with Flask receiver 
+WEBHOOK_USERNAME = 'username'
+WEBHOOK_PASSWORD = 'password'
+```
+
+You can also used the curl command to emulate the notification transmitter.
+```
+curl --insecure --user "username:password" --header "Content-Type: application/json" --request POST --data '{"Testing_Key":"Testing_Value"}' https://10.66.69.22:5443/webhook
+```
 
 
 
