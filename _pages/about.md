@@ -2,7 +2,7 @@
 permalink: /about/
 title: "About"
 author_profile: true
-layout: home
+layout: single
 last_modified_at: 2021-05-19
 toc: true
 toc_label: "Outline"
