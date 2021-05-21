@@ -35,7 +35,7 @@ curl --insecure --user "username:password" --header "Content-Type: application/j
 ```
 
 ***
-- [x] Firing a test from **DNAC**
+### Firing a test from **DNAC**
 
 ```bash
 cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
