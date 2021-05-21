@@ -1,5 +1,5 @@
 ---
-title: "Quick and dirty way of testing webhook with Python and DNAC"
+title: "Quick and dirty way of testing DNAC webhook with Python"
 layout: single
 tags:
   - DNAC
