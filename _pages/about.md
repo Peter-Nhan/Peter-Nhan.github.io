@@ -12,10 +12,13 @@ This blog is to help document things I have been exploring and playing with.
 
 Hopefully it will help you in a way, as it is a way for me to document things for my 'future' self as my 'current' self will tend to forget things. :-)
 
+Below is a dynamic list, message me (LinkedIn/signal/whatsapp...morse code..smoke signal) if you are exploring something interesting that I should look into as well.
+
 ### Current things
 - Use Python to Automate DNAC via API
 - Python automation with API, have also been teaching Python DNAC API internally in the company.
 - Webhooks with Python 
+- Terraform
 
 ### Upcoming things
 - All things Docker
