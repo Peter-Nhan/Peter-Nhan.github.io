@@ -35,9 +35,9 @@ You can also used the curl command to emulate the notification transmitter.
 curl --insecure --user "username:password" --header "Content-Type: application/json" --request POST --data '{"Testing_Key":"Testing_Value"}' https://10.66.69.22:5443/webhook
 ```
 
+***
+### Firing a test from **DNAC**
 
-
-Firing a test from **DNAC**
 ```bash
 cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
  * Serving Flask app 'flask_rx' (lazy loading)
