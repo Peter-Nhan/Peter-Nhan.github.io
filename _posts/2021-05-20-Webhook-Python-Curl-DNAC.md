@@ -12,7 +12,7 @@ toc_label: "Outline"
 ---
 Just playing around with Python Flask. Using it as "quick and dirty" way of testing Webhooks.
 
-Webhooks is a way to send notification from a application server like Cisco DNAC to another application. On the Cisco DNAC, you can subscribe to many different types of notifications and which external destination server to send these notifications to. 
+Webhooks is a way to send notification from an application to another application. On the Cisco DNAC, you can subscribe to many different types of event notifications and add external destination server to send these notifications to. 
 
 Python Flask will act as a webhook server, supporting HTTPS and authentication based webhooks. It is just a web server that allows other servers to post notifications to. (Reverse API)
 
