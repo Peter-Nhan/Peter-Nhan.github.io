@@ -9,6 +9,8 @@ tags:
   - Webhook
 toc: true
 toc_label: "Outline"
+toc_icon: "fas fa-gamepad"
+toc_sticky: True
 ---
 Just playing around with Python Flask. Using it as "quick and dirty" way of testing Webhooks.
 
@@ -22,11 +24,12 @@ We will use three different method to test the Python Flask Webhook server
 2. Use another Python code - **test_webhook.py** using the request.post fire the request
 3. Configure DNAC with the details of the webhook server and we can test fire from there.
 
-Before we begin, some details about the Webhook Flask server. I modified the original source [GitHub cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver)
+Before we begin, some details about the Webhook Flask server. I modified the original source [GitHub cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver). I enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
 
-Enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
-I updated **config.py** - Change IP address 10.66.69.22 to match where you are running the Flask Python code. 
-WEBHOOK_URL is only used by python code to emulate the notification transmitter **test_webhook.py**
+{: .notice--danger}
+Updated **config.py** to change IP address 10.66.69.22 to match where you are running the Flask Python code. 
+WEBHOOK_URL is only used by python code **test_webhook.py** to emulate the notification transmitter.
+WEBHOOK_USERNAME and WEBHOOK_PASSWORD should be update accordingly.
 
 ```python
 WEBHOOK_URL = 'https://10.66.69.22:5443/webhook'  # test with Flask receiver 
