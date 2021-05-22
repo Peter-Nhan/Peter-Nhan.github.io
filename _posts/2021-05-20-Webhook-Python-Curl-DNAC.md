@@ -141,7 +141,7 @@ Enter Password: password
 username:password
 Encoded string: dXNlcm5hbWU6cGFzc3dvcmQ=
 Header for Basic Authentication
-Authorization Name value: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
+Authorization Header value: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 ```
 
 [![](/assets/images/2021-05-20_webhook.jpg)](/assets/images/2021-05-20_webhook.jpg)
