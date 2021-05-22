@@ -17,7 +17,7 @@ Webhooks is a way to send notification from a application server like Cisco DNAC
 
 Python Flask will act as a webhook server, supporting HTTPS and authentication based webhooks. It is just a web server that allows other servers to post notifications to. (Reverse API)
 
-We will use three different method of test the Python Flask Webhook server 
+We will use three different method to test the Python Flask Webhook server 
 
 1. Curl command to test fire a webhook subscription at the server, 
 2. Use another Python code - **test_webhook.py** using the request.post fire the request
