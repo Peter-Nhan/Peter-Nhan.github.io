@@ -75,7 +75,7 @@ Payload:
 Webhook notification status code:  202
 Webhook notification response:  Webhook notification received
 ```
-> Meanwhile, on the Ubuntu VM it was running *flask_rx.py". It received the notification from our curl command - Note the payload is displayed.
+> Meanwhile, on the Ubuntu VM it was running *flask_rx.py". It received the notification from test_webhook.py - Note the payload is displayed.
 
 ```bash
 cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
@@ -146,7 +146,7 @@ Authorization Header value: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 Subscribe to a notification and "Try it"
 [![](/assets/images/2021-05-20_tryit.jpg)](/assets/images/2021-05-20_tryit.jpg)
 
-> Meanwhile, on the Ubuntu VM it was running *flask_rx.py". It received the notification from our curl command - Note the payload is displayed.
+> Meanwhile, on the Ubuntu VM it was running *flask_rx.py". It received the notification from Cisco DNAC - Note the payload is displayed.
 
 ```bash
 cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
