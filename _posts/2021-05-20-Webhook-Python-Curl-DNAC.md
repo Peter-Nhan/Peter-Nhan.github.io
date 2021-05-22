@@ -10,7 +10,6 @@ tags:
 toc: true
 toc_label: "Outline"
 ---
-
 Just playing around with Python Flask. Using it as "quick and dirty" way of testing Webhooks.
 
 Webhooks is a way to send notification from a application server like Cisco DNAC to another application. On the Cisco DNAC, you can subscribe to many different types of notifications and which external destination server to send these notifications to. 
@@ -35,7 +34,6 @@ WEBHOOK_USERNAME = 'username'
 WEBHOOK_PASSWORD = 'password'
 ```
 ***
-
 ### Firing a test from *curl* command
 The curl command to emulate the notification transmission.
 The data is any payload - intent was to test it works.
@@ -126,9 +124,7 @@ Payload:
 10.66.246.93 - - [22/May/2021 21:17:06] "POST /webhook HTTP/1.1" 202 -
 ```
 ***
-
 ### Firing a test from *Cisco DNAC*
-
 Add the webhook destination in DNAC
 [![](/assets/images/2021-05-20_destination.jpg)](/assets/images/2021-05-20_destination.jpg)
 
