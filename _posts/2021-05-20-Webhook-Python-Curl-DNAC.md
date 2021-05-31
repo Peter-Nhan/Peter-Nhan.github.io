@@ -12,16 +12,16 @@ toc_label: "Outline"
 toc_icon: "fas fa-gamepad"
 toc_sticky: True
 ---
-Just playing around with Python Flask. Using it as "quick and dirty" way of testing Webhooks.
-Webhooks is a way to send notification from an application to another application. 
+Just playing around with Python Flask. Using it as a "quick and dirty" way of testing Webhooks.
+Webhooks (Reverse API) is a way to send notification from one application to another application. 
 
-Python Flask will act as a webhook receiver, supporting HTTPS and authentication based webhooks.(Reverse API)
+Python Flask will act as a webhook receiver, supporting HTTPS and authentication based webhooks.
 
 Before we begin, some details about the Webhook Flask receiver. I modified the original source [GitHub cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver) and fork the changes here [Flask webhook receiver](https://github.com/Peter-Nhan/Flask_webhook_receiver). I enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
 
 > Analysis of flask_rx.py
 
-Python file flask_rx.py import value of the username and password from config.py. These credentials are used, when you post notification to the webhook receiver.
+Python file *flask_rx.py* import value of the username and password from *config.py*. These credentials are used, when you post notification to the webhook receiver.
 You can also customise the filename that is used to save all the received webhook notification 'save_webhook_output_file'.
 
 {% highlight python linenos %}
@@ -38,9 +38,9 @@ app.config['BASIC_AUTH_FORCE'] = True
 
 basic_auth = BasicAuth(app)
 {% endhighlight %}
-A number of flask route has been created - "/" and "/webhook".
-* "/" is used to test is server is running.
-* "/webhook" is used to post the webhook notification - so the full URL would be something like https://x.x.x.x/webhook
+A number of flask route has been created - "/" and "/webhook". This determines how the flask web service should treat the incoming request.
+* "/" is used to test if the web service is running.
+* "/webhook" is used to post the webhook notification - so the full URL would be https://x.x.x.x/webhook
 Once the webhook is received we use the json.dumps to print it to the screen and as well as dump it to the file.
 
 {% highlight python linenos %}
@@ -85,7 +85,7 @@ if __name__ == '__main__':
 We will use three different method to test the Python Flask Webhook receiver 
 
 1. Curl command to test fire a webhook subscription at the receiver, 
-2. Use another Python code - **test_webhook.py** using the request.post fire the request
+2. Use another Python code - *test_webhook.py* using the request.post fire the request
 3. On the Cisco DNAC, you can subscribe to many different types of event notifications and add external destination receiver to send these notifications to. Configure DNAC with the details of the webhook receiver and we can test fire from there.
 
 [![](/assets/images/2021-05-20_Curl_test_webhook.png)](/assets/images/2021-05-20_Curl_test_webhook.png)
@@ -93,9 +93,9 @@ We will use three different method to test the Python Flask Webhook receiver
 [![](/assets/images/2021-05-20_DNAC_Webhook.png)](/assets/images/2021-05-20_DNAC_Webhook.png)
 
 {: .notice--danger}
-Updated **config.py** to change IP address 10.66.69.22 to match where you are running the Flask Python code. 
-WEBHOOK_URL is only used by python code **test_webhook.py** to emulate the notification transmitter.
-WEBHOOK_USERNAME and WEBHOOK_PASSWORD should be update accordingly.
+Updated *config.py* to change IP address 10.66.69.22 to match where you are running the Flask Python code. 
+WEBHOOK_URL is only used by python code *test_webhook.py* to emulate the notification transmitter.
+Using the WEBHOOK_USERNAME and WEBHOOK_PASSWORD values from *config.py*.
 
 ```python
 WEBHOOK_URL = 'https://10.66.69.22:5443/webhook'  # test with Flask receiver 
@@ -105,7 +105,7 @@ WEBHOOK_PASSWORD = 'password'
 ***
 ### Firing a test from *curl* command
 The curl command to emulate the notification transmission.
-The data is any payload - intent was to test it works.
+The data is any payload - intent was to test functionality. You can customer the content of the dictionary after "--data"
 > Test done from my Mac
 
 ```bash
