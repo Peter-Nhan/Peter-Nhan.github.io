@@ -272,4 +272,7 @@ Payload:
 ```
 
 Please reach out if you have any questions or comments.
+
+**Coming Up Next:** Continue the same theme of webhook but change the python code to show the content of the log file via the same Flask web service.
+
 <i class="fas fa-ghost"></i>
