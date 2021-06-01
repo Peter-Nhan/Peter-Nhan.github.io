@@ -15,10 +15,10 @@ Hopefully it will help you in a way, as it is a way for me to document things fo
 Below is a dynamic list, message me (LinkedIn/signal/whatsapp...morse code..smoke signal) if you are exploring something interesting that I should look into as well.
 
 ### Current things
-- Use Python to Automate DNAC via API
-- Python automation with API, have also been teaching Python DNAC API internally in the company.
 - Webhooks with Python 
 - Terraform
+- Use Python to Automate DNAC via API
+- Python automation with API, have also been teaching Python DNAC API internally in the company.
 
 ### Upcoming things
 - All things Docker
