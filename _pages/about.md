@@ -6,6 +6,7 @@ layout: single
 last_modified_at: 2021-05-19
 toc: true
 toc_label: "Outline"
+sitemap: true
 ---
 
 This blog is to help document things I have been exploring and playing with. 
