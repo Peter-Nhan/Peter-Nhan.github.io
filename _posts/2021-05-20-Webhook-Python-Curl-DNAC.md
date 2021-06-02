@@ -25,7 +25,8 @@ Before we begin, some details about the Webhook Flask receiver. I modified the o
 > Analysis of flask_rx.py - Flask Webhook receiver
 
 Python file *flask_rx.py* imports the value of the username and password from *config.py*. These credentials are used by the flask web server, as well as when you post webhook notification from the *test_webhook.py*.
-You can also customise the filename that is used to save all the received webhook notification 'save_webhook_output_file'.
+
+You can customise the filename that is used to save all the received webhook notification 'save_webhook_output_file' variable in *flask_rx.py*.
 
 {% highlight python linenos %}
 from config import WEBHOOK_USERNAME, WEBHOOK_PASSWORD
