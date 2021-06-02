@@ -22,6 +22,7 @@ Python Flask will act as a webhook receiver, supporting HTTPS and authentication
 
 Before we begin, some details about the Webhook Flask receiver. I modified the original source [GitHub - cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver) and fork the changes here [Github - Flask webhook receiver](https://github.com/Peter-Nhan/Flask_webhook_receiver). I enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
 
+### Code break down
 > Analysis of flask_rx.py - Flask Webhook receiver
 
 Python file *flask_rx.py* imports the value of the username and password from *config.py*. These credentials are used by the flask web server, as well as when you post webhook notification from the *test_webhook.py*.
@@ -44,8 +45,8 @@ basic_auth = BasicAuth(app)
 {% endhighlight %}
 A number of flask route has been created - "/" and "/webhook". This determines how the flask web service should treat the incoming request.
 * "/" is used to test if the web service is running.
-* "/webhook" is used to post the webhook notification - so the full URL would be https://x.x.x.x/webhook
-Once the webhook is received we use the json.dumps to print it to the screen and as well as dump it to the file.
+* "/webhook" is used to post the webhook notification - so the full URL would be https://x.x.x.x/webhook 
+. Once the webhook notification is received by flask, we use json.dumps to print it to the screen and as well as dump it to the file.
 
 {% highlight python linenos %}
 @app.route('/')  # create a route for / - just to test server is up.
@@ -86,6 +87,7 @@ if __name__ == '__main__':
     app.run(ssl_context='adhoc', host='0.0.0.0', port=5443, debug=True)
 {% endhighlight %}
 
+### Test methodology
 We will use three different method to test the Python Flask Webhook receiver 
 
 1. Curl command to test fire a webhook subscription at the receiver, 
