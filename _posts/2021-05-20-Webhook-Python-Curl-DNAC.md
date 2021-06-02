@@ -22,9 +22,9 @@ Python Flask will act as a webhook receiver, supporting HTTPS and authentication
 
 Before we begin, some details about the Webhook Flask receiver. I modified the original source [GitHub - cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver) and fork the changes here [Github - Flask webhook receiver](https://github.com/Peter-Nhan/Flask_webhook_receiver). I enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
 
-> Analysis of flask_rx.py
+> Analysis of flask_rx.py - Flask Webhook receiver
 
-Python file *flask_rx.py* import value of the username and password from *config.py*. These credentials are used, when you post notification to the webhook receiver.
+Python file *flask_rx.py* imports the value of the username and password from *config.py*. These credentials are used by the flask web server, as well as when you post webhook notification from the *test_webhook.py*.
 You can also customise the filename that is used to save all the received webhook notification 'save_webhook_output_file'.
 
 {% highlight python linenos %}
