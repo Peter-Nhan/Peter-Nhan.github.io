@@ -104,7 +104,7 @@ WEBHOOK_URL is only used by python code *test_webhook.py* to emulate the notific
 Using the WEBHOOK_USERNAME and WEBHOOK_PASSWORD values from *config.py*.
 
 ```python
-WEBHOOK_URL = 'https://10.66.69.22:5443/webhook'  # test with Flask receiver 
+WEBHOOK_URL = 'https://172.16.1.16:5443/webhook'  # test with Flask receiver 
 WEBHOOK_USERNAME = 'username'
 WEBHOOK_PASSWORD = 'password'
 ```
@@ -115,7 +115,7 @@ The data is any payload - intent was to test functionality. You can customer the
 > Test done from my Mac
 
 ```bash
-[pnhan@PNHAN-M-1466 ~/Documents/Python/webhook]$ curl --insecure --user "username:password" --header "Content-Type: application/json" --request POST --data '{"Testing_Key":"Testing_Value"}' https://10.66.69.22:5443/webhook
+[pnhan@PNHAN-M-1466 ~/Documents/Python/webhook]$ curl --insecure --user "username:password" --header "Content-Type: application/json" --request POST --data '{"Testing_Key":"Testing_Value"}' https://172.16.1.16:5443/webhook
 Webhook notification received%
 [pnhan@PNHAN-M-1466 ~/Documents/Python/webhook]$
 ```
@@ -130,7 +130,7 @@ cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
  * Debug mode: on
  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
- * Running on https://10.66.69.22:5443/ (Press CTRL+C to quit)
+ * Running on https://172.16.1.16:5443/ (Press CTRL+C to quit)
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 768-531-813
@@ -139,7 +139,7 @@ Payload:
 {
     "Testing_Key" : "Testing_Value"
 }
-10.66.246.93 - - [22/May/2021 21:10:23] "POST /webhook HTTP/1.1" 202 -
+172.16.1.20 - - [22/May/2021 21:10:23] "POST /webhook HTTP/1.1" 202 -
 ```
 ***
 ### Firing a test from *test_webhook.py* command
@@ -161,7 +161,7 @@ cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
  * Debug mode: on
  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
- * Running on https://10.66.69.22:5443/ (Press CTRL+C to quit)
+ * Running on https://172.16.1.16:5443/ (Press CTRL+C to quit)
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 768-531-813
@@ -197,7 +197,7 @@ Payload:
     "context" : "" ,
     "tenantId" : ""
 }
-10.66.246.93 - - [22/May/2021 21:17:06] "POST /webhook HTTP/1.1" 202 -
+172.16.1.20 - - [22/May/2021 21:17:06] "POST /webhook HTTP/1.1" 202 -
 ```
 ***
 ### Firing a test from *Cisco DNAC*
@@ -234,7 +234,7 @@ cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
  * Debug mode: on
  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
- * Running on https://10.66.69.22:5443/ (Press CTRL+C to quit)
+ * Running on https://172.16.1.16:5443/ (Press CTRL+C to quit)
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 768-531-813
@@ -274,7 +274,7 @@ Payload:
     "parentInstanceId" : null ,
     "network" : null
 }
-10.66.50.20 - - [20/May/2021 17:12:02] "POST /webhook HTTP/1.1" 202 -
+172.16.1.20 - - [20/May/2021 17:12:02] "POST /webhook HTTP/1.1" 202 -
 ```
 
 Please reach out if you have any questions or comments.
