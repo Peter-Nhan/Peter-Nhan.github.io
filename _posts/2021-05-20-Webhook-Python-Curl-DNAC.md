@@ -99,7 +99,7 @@ We will use three different method to test the Python Flask Webhook receiver
 [![](/assets/images/2021-05-20_DNAC_Webhook.png)](/assets/images/2021-05-20_DNAC_Webhook.png)
 
 {: .notice--danger}
-Updated *config.py* to change IP address 10.66.69.22 to match where you are running the Flask Python code. 
+Updated *config.py* to change IP address 172.16.1.16 and TCP port to match where you are running the Flask Python code. 
 WEBHOOK_URL is only used by python code *test_webhook.py* to emulate the notification transmitter.
 Using the WEBHOOK_USERNAME and WEBHOOK_PASSWORD values from *config.py*.
 
