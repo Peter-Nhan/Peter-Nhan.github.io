@@ -14,6 +14,7 @@ toc_sticky: True
 description: Quick and dirty. Use Python Flask Webhook Receiver. Test with curl, and Cisco DNAC. With Github source code DEVNET
 categories: posts
 sitemap: true
+pkeywords: Python, Automation, Cisco, Devnet, Flask, DNAC
 ---
 Just playing around with Python Flask. Using it as a "quick and dirty" way of testing Webhooks.
 Webhooks (Reverse API) is a way to send notification from one application to another application. 
