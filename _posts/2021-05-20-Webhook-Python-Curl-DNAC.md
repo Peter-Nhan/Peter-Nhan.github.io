@@ -23,9 +23,11 @@ Python Flask will act as a webhook receiver, supporting HTTPS and authentication
 
 Before we begin, some details about the Webhook Flask receiver. I modified the original source [GitHub - cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver) and fork the changes here [Github - Flask webhook receiver](https://github.com/Peter-Nhan/Flask_webhook_receiver). I enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
 
-{: .notice--info}
-If you are playing along - remember to 'pip3 install requirements.txt'. This will install the require libraries used by the python script.
+{: .notice--info} 
+<i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Important:</b><br>
+If you are playing along - remember to 'pip3 install requirements.txt'. This will install the required libraries used by the python script.
 
+***
 ### Code break down
 > Analysis of flask_rx.py - Flask Webhook receiver
 
@@ -103,15 +105,16 @@ We will use three different method to test the Python Flask Webhook receiver
 [![](/assets/images/2021-05-20_DNAC_Webhook.png)](/assets/images/2021-05-20_DNAC_Webhook.png)
 
 {: .notice--info}
-Update *config.py* to change IP address 172.16.1.16 and TCP port to match where you are running the Flask Python code. 
-WEBHOOK_URL is only used by python code *test_webhook.py* to emulate the notification transmitter.
-Using the WEBHOOK_USERNAME and WEBHOOK_PASSWORD values from *config.py*.
+<i class="fa fa-exclamation-triangle fa-2x fa-fw" style="color:yellow"></i> <b>Important:</b><br>
+Modify *config.py* to change the IP address in WEBHOOK_URL and TCP port to match your environment. Specify the IP address of the device running the Flask Python code. <br><br>
+WEBHOOK_URL is only used by python code *test_webhook.py* to emulate the notification transmitter. <br><br>
+Both *test_webhook.py* and *flask_rx.py* will use the WEBHOOK_USERNAME and WEBHOOK_PASSWORD values from *config.py*.
 
-```python
+{% highlight python linenos %}
 WEBHOOK_URL = 'https://172.16.1.16:5443/webhook'  # test with Flask receiver 
 WEBHOOK_USERNAME = 'username'
 WEBHOOK_PASSWORD = 'password'
-```
+{% endhighlight %}
 ***
 ### Firing a test from *curl* command
 The curl command to emulate the notification transmission.
@@ -229,7 +232,7 @@ Subscribe to a notification and "Try it"
 
 > Meanwhile, on the Ubuntu VM it was running *flask_rx.py*. It received the notification from Cisco DNAC - Note the payload is displayed.
 
-```bash
+```shell
 cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
  * Serving Flask app 'flask_rx' (lazy loading)
  * Environment: production
@@ -280,9 +283,11 @@ Payload:
 }
 10.66.50.14 - - [20/May/2021 17:12:02] "POST /webhook HTTP/1.1" 202 -
 ```
+***
+### Summary
+Flask is pretty powerful with just a few lines of code you can have a fully functioning web server.
 
-Please reach out if you have any questions or comments.
+**Coming Up Next:** We will further explore ways of customising flask using template to get **Maximum Impact** with very little efforts. And we will continue the same theme of webhook but change the python code to show the content of the log file via the same Flask web service. 
 
-**Coming Up Next:** Continue the same theme of webhook but change the python code to show the content of the log file via the same Flask web service.
-
-<i class="fas fa-ghost"></i>
+Please reach out if you have any questions or comments.<br>
+<i class="fas fa-ghost fa-2x fa-spin"></i>
