@@ -71,7 +71,8 @@ naver_site_verification  :
 
 # Social Sharing
 twitter:
-  username               :
+  username               : "PeterNhan"
+  image                  : "assets/images/MyPlayground_800x800.png"
 facebook:
   username               :
   app_id                 :
