@@ -23,6 +23,9 @@ Python Flask will act as a webhook receiver, supporting HTTPS and authentication
 
 Before we begin, some details about the Webhook Flask receiver. I modified the original source [GitHub - cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver) and fork the changes here [Github - Flask webhook receiver](https://github.com/Peter-Nhan/Flask_webhook_receiver). I enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
 
+{: .notice--info}
+If you are playing along - remember to 'pip3 install requirements.txt'. This will install the require libraries used by the python script.
+
 ### Code break down
 > Analysis of flask_rx.py - Flask Webhook receiver
 
@@ -99,8 +102,8 @@ We will use three different method to test the Python Flask Webhook receiver
 
 [![](/assets/images/2021-05-20_DNAC_Webhook.png)](/assets/images/2021-05-20_DNAC_Webhook.png)
 
-{: .notice--danger}
-Updated *config.py* to change IP address 172.16.1.16 and TCP port to match where you are running the Flask Python code. 
+{: .notice--info}
+Update *config.py* to change IP address 172.16.1.16 and TCP port to match where you are running the Flask Python code. 
 WEBHOOK_URL is only used by python code *test_webhook.py* to emulate the notification transmitter.
 Using the WEBHOOK_USERNAME and WEBHOOK_PASSWORD values from *config.py*.
 
