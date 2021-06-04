@@ -16,10 +16,10 @@ categories: posts
 sitemap: true
 pkeywords: Python, Automation, Cisco, Devnet, Flask, DNAC
 ---
-Exploring the power of Python Flask, we will use Python Flask to act as a Webhook Receive and we will test firing webhooks notification at it via curl, python code and Cisco DNAC. 
+Exploring the power of Python Flask. We will use Flask to act as a Webhook Receive and we will test firing webhooks notification at it via curl, python code and Cisco DNAC. 
 Webhooks (Reverse API) is a way to send notification from one application to another application. 
 
-Python Flask will act as a webhook receiver, supporting HTTPS and authentication based webhooks.
+Python Flask has been configured to support HTTPS and user authentication.
 
 Before we begin, some details about the Webhook Flask receiver. I modified the original source [GitHub - cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver) and fork the changes here [Github - Flask webhook receiver](https://github.com/Peter-Nhan/Flask_webhook_receiver). I enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
 
