@@ -11,7 +11,7 @@ toc: true
 toc_label: "Outline"
 toc_icon: "fas fa-gamepad"
 toc_sticky: True
-description: Quick and dirty. Use Python Flask Webhook Receiver. Test with curl, and Cisco DNAC. With Github source code DEVNET
+description: Exploring the power of Python Flask, we use Python Flask to act as a Webhook Receive and test firing webhooks via curl, python code and Cisco DNAC. Source Code available on Github.
 categories: posts
 sitemap: true
 pkeywords: Python, Automation, Cisco, Devnet, Flask, DNAC
