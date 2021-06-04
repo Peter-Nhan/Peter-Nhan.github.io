@@ -215,9 +215,11 @@ Add the credential of the webhook.
 
 [![](/assets/images/2021-05-20_webhook.jpg)](/assets/images/2021-05-20_webhook.jpg)
 
-Note the Authorization headers is a Base64 encoding of username:password
-If you need help with the Base64 encoding - I have included *userpass_base64.py* to help.
-```
+{: .notice--info}
+<i class="fa fa-exclamation-triangle fa-2x fa-fw" style="color:yellow"></i> <b>Important:</b><br>
+Note the Authorization headers is a Base64 encoding of username:password. If you need help with the Base64 encoding - I have included *userpass_base64.py* to help.
+
+```shell
 [pnhan@PNHAN-M-1466 ~/Documents/Python/webhook]$ python3 userpass_base64.py
 Enter Username: username
 Enter Password: password
@@ -285,7 +287,7 @@ Payload:
 ```
 ***
 ### Summary
-Flask is pretty powerful with just a few lines of code you can have a fully functioning web server.
+Flask is pretty powerful, with just a few lines of code you can have a fully functioning web server.
 
 **Coming Up Next:** We will further explore ways of customising flask using template to get **Maximum Impact** with very little efforts. And we will continue the same theme of webhook but change the python code to show the content of the log file via the same Flask web service. 
 
