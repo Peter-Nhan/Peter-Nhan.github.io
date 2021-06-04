@@ -9,7 +9,7 @@ tags:
   - Webhook
 toc: true
 toc_label: "Outline"
-toc_icon: "fas fa-gamepad"
+toc_icon: "fa fa-spinner fa-spin"
 toc_sticky: True
 description: Exploring the power of Python Flask, we will use Python Flask to act as a Webhook Receive and we will test firing webhooks notification at it via curl, python code and Cisco DNAC. Source Code available on Github.
 categories: posts

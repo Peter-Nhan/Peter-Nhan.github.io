@@ -9,7 +9,7 @@ tags:
   - Webhook
 toc: true
 toc_label: "Outline"
-toc_icon: "fas fa-gamepad"
+toc_icon: "fa fa-spinner fa-spin"
 toc_sticky: True
 description: We build on top of the Python Flask Webhook Receiver. Add a WebUI to view the log.
 categories: posts
