@@ -11,12 +11,12 @@ toc: true
 toc_label: "Outline"
 toc_icon: "fas fa-gamepad"
 toc_sticky: True
-description: Exploring the power of Python Flask, we use Python Flask to act as a Webhook Receive and test firing webhooks via curl, python code and Cisco DNAC. Source Code available on Github.
+description: Exploring the power of Python Flask, we will use Python Flask to act as a Webhook Receive and we will test firing webhooks notification at it via curl, python code and Cisco DNAC. Source Code available on Github.
 categories: posts
 sitemap: true
 pkeywords: Python, Automation, Cisco, Devnet, Flask, DNAC
 ---
-Just playing around with Python Flask. Using it as a "quick and dirty" way of testing Webhooks.
+Exploring the power of Python Flask, we will use Python Flask to act as a Webhook Receive and we will test firing webhooks notification at it via curl, python code and Cisco DNAC
 Webhooks (Reverse API) is a way to send notification from one application to another application. 
 
 Python Flask will act as a webhook receiver, supporting HTTPS and authentication based webhooks.
