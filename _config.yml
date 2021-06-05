@@ -18,9 +18,9 @@ minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "
 locale                   : "en-US"
 title                    : "My Playground"
 title_separator          : "-"
-subtitle                 : "An Automation Journey" # site tagline that appears below site title in masthead
+subtitle                 : "An Automation and Orchestration Journey" # site tagline that appears below site title in masthead
 name                     : "Peter Nhan"
-description              : "An Automation Journey"
+description              : "An Automation and Orchestration Journey"
 url                      : "https://peter-nhan.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "/" # the subpath of your site, e.g. "/blog"
 repository               : "Peter-Nhan/Peter-Nhan.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
