@@ -116,6 +116,29 @@ WEBHOOK_USERNAME = 'username'
 WEBHOOK_PASSWORD = 'password'
 {% endhighlight %}
 ***
+
+After starting 
+```bash
+$ python3 flask_rx.py
+```
+Check if the Linux VM is listening on the port 5443.
+
+```bash
+$ sudo ss -tulpn
+Netid  State   Recv-Q  Send-Q     Local Address:Port      Peer Address:Port  Process
+. . . . SNIPPET . . . . 
+tcp    LISTEN  0       128              0.0.0.0:5443           0.0.0.0:*      users:(("python3",pid=400977,fd=4),("python3",pid=400977,fd=3),("python3",pid=400975,fd=3))
+tcp    LISTEN  0       4096       127.0.0.53%lo:53             0.0.0.0:*      users:(("systemd-resolve",pid=327488,fd=13))
+tcp    LISTEN  0       128              0.0.0.0:22             0.0.0.0:*      users:(("sshd",pid=81227,fd=3))
+
+```
+And Check if the firewall is active.
+
+```bash
+$ sudo ufw status
+Status: inactive
+```
+
 ### Firing a test from *curl* command
 The curl command to emulate the notification transmission.
 The data is any payload - intent was to test functionality. You can customer the content of the dictionary after "--data"
