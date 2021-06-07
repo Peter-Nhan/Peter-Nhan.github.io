@@ -132,7 +132,7 @@ tcp    LISTEN  0       4096       127.0.0.53%lo:53             0.0.0.0:*      us
 tcp    LISTEN  0       128              0.0.0.0:22             0.0.0.0:*      users:(("sshd",pid=81227,fd=3))
 
 ```
-And Check if the firewall is active.
+And Check if the firewall is not active.
 
 ```bash
 $ sudo ufw status
