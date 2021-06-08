@@ -12,13 +12,13 @@ toc: true
 toc_label: "Outline"
 toc_icon: "fa fa-spinner fa-spin"
 toc_sticky: True
-description: We build on top of the Python Flask Webhook Receiver. Add a WebUI to view the log. And we talk about flask and Jinja2 relationship
+description: We build on top of the Python Flask Webhook Receiver. Add a WebUI to view the log. Most of the HTML code would be bootstrapped. And we will talk about flask and Jinja2 relationship
 categories: posts
 sitemap: true
 published: true
 pkeywords: Python, Automation, Cisco, Devnet, Flask, DNAC, webhook, bootstrap, jinja2
 ---
-Taking the Python Flask Webhook Receiver to the next level, but still exploring the power of Flask. We are using Flask to display the content of the json file, which we used to store all the webhook we received.
+Taking the Python Flask Webhook Receiver to the next level, but still exploring the power of Flask. We are using Flask to display the content of the json file, which we used to store all the webhook we received. We will use and discuss a technique of building HTML called Bootstrap.
 
 Follow along files [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver)
 ### Quick demo
@@ -120,4 +120,11 @@ def log():
     return render_template('bootstrap.html', content_var = content_of_file, filename_var = save_webhook_output_file)
 {% endhighlight %}
 
+***
+### Summary
+Bootstraping the HTML, means you do not need to know a lot about HTML. Combined that with Flask and you quickly see that you can easily portal or webpages very quickly.
 
+**Coming Up Next:** Going to have a go at dockerizing the code. Point out any pitfalls during the process.
+
+As always, please reach out if you have any questions or comments or suggestions.<br>
+<i class="fas fa-ghost fa-2x fa-spin"></i>
