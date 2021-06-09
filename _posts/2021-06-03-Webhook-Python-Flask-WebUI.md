@@ -103,7 +103,7 @@ These content are passed in via the flask in the python code.
 **Second part is the python** code - we create another route for **/log**, this will trigger when you use https://x.x.x.x:5433/log.
 Once triggered it will open a filename *all_webhooks_detailed.json*, and save the content into a variable called *content_of_file*. The flask **render_template** function will take these variable and passed the into the HTML template. And Flask will then render the output of those variables into what you see in the web page.
 
-|HTML Variable|Python Variable|
+|Python Variable|HTML Variable|
 |---------------|----------------|
 | content_of_file, save_webhook_output_file | content_var, filename_var  |
 
