@@ -124,7 +124,7 @@ def log():
 ### Summary
 Bootstraping the HTML, means you do not need to know a lot about HTML. Combined that with Flask and you quickly see that you can easily portal or webpages very quickly.
 
-**Coming Up Next:** Going to have a go at dockerizing the code. Point out any pitfalls during the process.
+**Coming Up Next:** Going to have a go at dockerising the python code and point out any pitfalls during the process.
 
 As always, please reach out if you have any questions or comments or suggestions.<br>
 <i class="fas fa-ghost fa-2x fa-spin"></i>
