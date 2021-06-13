@@ -25,7 +25,7 @@ Follow along files [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver
 
 After kicking off the flask_rx_web_view.py, I can browse to https://10.66.69.22:5443/log (ignore the security pop up - we do not have proper certificate in place - "Accept the Risk and Continue"). The webpage will display the content of the log and will refreshed every 10 seconds. I have also test fire a curl webhook at the webhook receiver, and you can see it update after the 10 seconds. 
 
-The top of the web page has a navigation bar, that has options to allow you to manually refreshed the page and a button to download the json file.
+The top of the web page has a navigation bar, that has options to allow you to manually refreshed the page and a button to download the json file. These were added by "bootstrapping" the HTML in the template folder. More details below.
 
 [![](/assets/images/2021-06-03_Auto_Refresh_animated.gif)](/assets/images/2021-06-03_Auto_Refresh_animated.gif)
 
