@@ -20,7 +20,12 @@ pkeywords: Python, Automation, Cisco, Devnet, Flask, DNAC, webhook, bootstrap, j
 ---
 Taking the Python Flask Webhook Receiver to the next level, but still exploring the power of Flask. We are using Flask to display the content of the json file, which we used to store all the webhook we received. We will use and discuss a technique of building HTML called Bootstrap.
 
-Follow along files [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver)
+To follow along the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver).
+
+{: .notice--info} 
+<i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Important:</b><br>
+If you are playing along - remember to 'pip3 install requirements.txt'. This will install the required libraries used by the python script.
+
 ### Quick demo
 
 After kicking off the flask_rx_web_view.py, I can browse to https://10.66.69.22:5443/log (ignore the security pop up - we do not have proper certificate in place - "Accept the Risk and Continue"). The webpage will display the content of the log and will refreshed every 10 seconds. I have also test fire a curl webhook at the webhook receiver, and you can see it update after the 10 seconds. 
