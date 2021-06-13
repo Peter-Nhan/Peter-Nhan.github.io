@@ -92,7 +92,7 @@ This section of bootstrap.html makes the web page refresh every 10 seconds.
 ```
 This section of bootstrap.html creates two links:
 * "Refresh Page" link manually refreshes the current web page
-* "Download all_webhooks_detailed.json" button to allow you to download the file - not the variable that is surrounded double curly brackets was passed into the HTML code via the python call (see next section)
+* "Download all_webhooks_detailed.json" button to allow you to download the file - **Note** the variable that is surrounded double curly brackets (filenamez_var), thiswas  passed into the HTML code via the python call (see next section)
 
 ```html
 {% raw %}
