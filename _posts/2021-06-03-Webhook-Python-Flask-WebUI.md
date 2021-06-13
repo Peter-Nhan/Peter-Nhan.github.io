@@ -95,6 +95,7 @@ This section of bootstrap.html creates two links:
 * "Download all_webhooks_detailed.json" button to allow you to download the file - not the variable that is surrounded double curly brackets was passed into the HTML code via the python call (see next section)
 
 ```html
+{% raw %}
 <!-- Create a link on web page call "Refresh Page" to reload the page manually -->
           <li class="nav-item active">
             <a class="nav-link" href="/log">Refresh Page
@@ -105,6 +106,7 @@ This section of bootstrap.html creates two links:
             <a button type="button" href="/download" class="btn btn-success">Download {{ filename_var }}</button>
             </a>  
           </li>
+{% endraw %}
 ```
 
 Notice the doubly curly brackets are the two Jinja2 variable:
