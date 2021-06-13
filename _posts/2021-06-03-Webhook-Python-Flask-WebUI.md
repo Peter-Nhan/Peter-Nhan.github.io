@@ -165,7 +165,7 @@ def download():
 
 ***
 ### Summary
-Bootstraping the HTML, means you do not need to know a lot about HTML. Combined that with Flask and you quickly and easily great looking portal or webpages.
+Bootstraping the HTML, means you do not need to know a lot about HTML. Combined that with Flask and you quickly and easily create great looking portal or webpages.
 
 **Coming Up Next:** Going to have a go at dockerising the python code and point out any pitfalls during the process.
 
