@@ -30,6 +30,11 @@ If you are playing along - remember to 'pip3 install requirements.txt'. This wil
 
 After kicking off the flask_rx_web_view.py, I can browse to https://10.66.69.22:5443/log (ignore the security pop up - we do not have proper certificate in place - "Accept the Risk and Continue"). The webpage will display the content of the log and will refreshed every 10 seconds. I have also test fire a curl webhook at the webhook receiver, and you can see it update after the 10 seconds. 
 
+{: .notice--info} 
+<i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Important:</b><br>
+Your IP address of the device you are running the python code maybe different to mine. The IP address where I ran the 
+'python3 flask_rx_web_view.py' is 10.66.69.22.
+
 The top of the web page has a navigation bar, that has options to allow you to manually refreshed the page and a button to download the json file. These were added by "bootstrapping" the HTML in the template folder. More details below.
 
 [![](/assets/images/2021-06-03_Auto_Refresh_animated.gif)](/assets/images/2021-06-03_Auto_Refresh_animated.gif)
