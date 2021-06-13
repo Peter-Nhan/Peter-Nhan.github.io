@@ -23,7 +23,7 @@ Taking the Python Flask Webhook Receiver to the next level, but still exploring 
 Follow along files [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver)
 ### Quick demo
 
-After kicking off the flask_rx_web_view.py, I can browse to https://10.66.69.22:5443/log (ignore the security pop up - we do not have proper certificate in place). The webpage will display the content of the log and will refreshed every 10 seconds. I have also test fire a curl webhook at the webhook receiver, and you can see it update after the 10 seconds. 
+After kicking off the flask_rx_web_view.py, I can browse to https://10.66.69.22:5443/log (ignore the security pop up - we do not have proper certificate in place - "Accept the Risk and Continue"). The webpage will display the content of the log and will refreshed every 10 seconds. I have also test fire a curl webhook at the webhook receiver, and you can see it update after the 10 seconds. 
 
 [![](/assets/images/2021-06-03_Auto_Refresh_animated.gif)](/assets/images/2021-06-03_Auto_Refresh_animated.gif)
 
@@ -79,9 +79,35 @@ They have made it so easy to get a decent website up and running. They provide a
 
 I used their example Navbar to build what you see above demo - [https://getbootstrap.com/docs/5.0/components/navbar/](https://getbootstrap.com/docs/5.0/components/navbar/)
 
+Buttons looked pretty cool too - https://getbootstrap.com/docs/4.0/components/buttons/
+
 I have already heavily commented the included HTML template(bootstrap.html). Most of it, is about making the webpage look decent. But I will go through the core part of the HTML template that produces the dynamic content you see.
 
-The HTML code you see below is a snippet from the bootstrap.html. Notice the doubly curly brackets are the two Jinja2 variable:
+The HTML code you see below is a snippet from the bootstrap.html. 
+
+This section of bootstrap.html makes the web page refresh every 10 seconds.
+```html
+<!-- Automatically refresh web page every 10 seconds  -->    
+    <meta http-equiv="refresh" content="10">
+```
+This section of bootstrap.html creates two links:
+* "Refresh Page" link manually refreshes the current web page
+* "Download all_webhooks_detailed.json" button to allow you to download the file - not the variable that is surrounded double curly brackets was passed into the HTML code via the python call (see next section)
+
+```html
+<!-- Create a link on web page call "Refresh Page" to reload the page manually -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/log">Refresh Page
+            </a>
+          </li>
+<!-- Create a button link on web page to download the json file -->          
+          <li class="nav-item active">
+            <a button type="button" href="/download" class="btn btn-success">Download {{ filename_var }}</button>
+            </a>  
+          </li>
+```
+
+Notice the doubly curly brackets are the two Jinja2 variable:
 * filename_var - variable has the filename of the log.
 * content_var - content of the log file is store here.
 These content are passed in via the flask in the python code.
@@ -100,7 +126,12 @@ These content are passed in via the flask in the python code.
   </main>
 {% endraw %}
 ```
-**Second part is the python** code - we create another route for **/log**, this will trigger when you use https://x.x.x.x:5433/log.
+
+
+
+**Second part is the python** code - we create two more route for **/log** and **/download**.  They are trigger when you use https://x.x.x.x:5433/log or https://x.x.x.x:5433/download.
+
+**https://x.x.x.x:5433/log**
 Once triggered it will open a filename *all_webhooks_detailed.json*, and save the content into a variable called *content_of_file*. The flask **render_template** function will take these variable and passed the into the HTML template. And Flask will then render the output of those variables into what you see in the web page.
 
 |Python Variable|HTML Variable|
@@ -118,6 +149,16 @@ def log():
     with open(save_webhook_output_file, "r") as f: 
         content_of_file = f.read() 
     return render_template('bootstrap.html', content_var = content_of_file, filename_var = save_webhook_output_file)
+{% endhighlight %}
+
+**https://x.x.x.x:5433/downloads**
+Once this call is triggered it will send the file with filename stored in the variable *save_webhook_output_file* to clients web browser.
+
+{% highlight python linenos %}
+# Download the logs file
+@app.route("/download", methods=['GET'])  # create a route for /download, method GET
+def download():
+    return send_file(save_webhook_output_file, as_attachment=True)
 {% endhighlight %}
 
 ***
