@@ -20,7 +20,7 @@ pkeywords: Python, Automation, Cisco, Devnet, Flask, DNAC, webhook, bootstrap, j
 ---
 Taking the Python Flask Webhook Receiver to the next level, but still exploring the power of Flask. We are using Flask to display the content of the json file, which we used to store all the webhook we received. We will use and discuss a technique of building HTML called Bootstrap.
 
-To follow along the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver).
+To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver).
 
 {: .notice--info} 
 <i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Important:</b><br>
