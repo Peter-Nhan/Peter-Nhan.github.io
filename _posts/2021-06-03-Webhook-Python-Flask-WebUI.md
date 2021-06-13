@@ -133,7 +133,7 @@ These content are passed in via the flask in the python code.
 
 **Second part is the python** code - we create two more route for **/log** and **/download**.  They are trigger when you use https://x.x.x.x:5433/log or https://x.x.x.x:5433/download.
 
-**https://x.x.x.x:5433/log**
+- **https://x.x.x.x:5433/log**
 Once triggered it will open a filename *all_webhooks_detailed.json*, and save the content into a variable called *content_of_file*. The flask **render_template** function will take these variable and passed the into the HTML template. And Flask will then render the output of those variables into what you see in the web page.
 
 |Python Variable|HTML Variable|
@@ -153,7 +153,7 @@ def log():
     return render_template('bootstrap.html', content_var = content_of_file, filename_var = save_webhook_output_file)
 {% endhighlight %}
 
-**https://x.x.x.x:5433/downloads**
+- **https://x.x.x.x:5433/downloads**
 Once this call is triggered it will send the file with filename stored in the variable *save_webhook_output_file* to clients web browser.
 
 {% highlight python linenos %}
