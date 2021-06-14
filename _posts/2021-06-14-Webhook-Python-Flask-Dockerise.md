@@ -579,7 +579,7 @@ Notice it left the previous built image behind. No big deal - easily cleaned up 
 
 ***
 ### Summary
-We have come along way, 2 post ago, we were talking webhooks, python and the power of flask. We were also discussing bootstrapping HTML code. Now we have taken that and turn it into a functioning docker application.
+We have come along way, 2 post ago, we were talking about webhooks, python and the power of flask. We were also discussing bootstrapping HTML code. Now we have taken that and turn it into a functioning docker application.
 <br>Hopefully, you have found it useful.
 
 As always, please reach out if you have any questions or comments or suggestions.<br>
