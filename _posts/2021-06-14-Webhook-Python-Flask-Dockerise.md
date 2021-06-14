@@ -369,8 +369,8 @@ $
 ```
 
 ***
-### Next Level It! docker-compose
-Docker-compose is taking docker containers to the next level. With this one yml file you can build and launch more than containers at the same time. It can also be used in development environment when your python code keeps changing, and you are sick of going through the process of stop/remove containers, and re-build new image. Then start the containers up again.
+### Next Level It! Docker-compose
+Docker-compose is taking those simple docker we saw above to the next level. With this one yml file you can build and launch more than containers at the same time. It can also be used in development environment when your python code keeps changing, and you are sick of going through the process of stop/remove containers, and re-build new image. Then start the containers up again.
 
 The content of docker-compose.yml
 {% highlight dockerfile linenos %}
