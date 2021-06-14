@@ -24,11 +24,23 @@ Our requirements are quite straight-forward:
 - No need to have external volume to backup our json file, as our app provides the ability to download(backup) received notifications json file.
 - If we make adjustments to the python file, how to make it easier to re-build the app.
 
-To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver).
 
 We will be paying close attention to:
 - Dockerfile - this is the file we will use to build our docker image. The focus here is what to package the image with.
 - docker-compose.yml - this file we will use with docker-compose to define and run docker container.
+
+To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver).
+I am running the docker on my Ubuntu 20.04.2 Desktop VM.
+
+The following commands are what I used to install docker and docker-compose on my Ubuntu.
+More details can be found on: [Docker Docs](https://docs.docker.com/engine/)
+
+```bash
+sudo apt install docker.io
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
 
 ***
 ### Code Breakdown - Dockerfile
@@ -53,6 +65,7 @@ Directory structure used:
 .
 ├── all_webhooks_detailed.json
 ├── config.py
+├── docker-compose.yml
 ├── Dockerfile
 ├── flask_rx.py
 ├── flask_rx_web_view.py
