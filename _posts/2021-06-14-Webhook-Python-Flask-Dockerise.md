@@ -4,9 +4,9 @@ layout: single
 tags:
   - Python
   - Flask
-  - Curl
   - Webhook
-  - bootstrap
+  - Docker
+  - slim
 toc: true
 toc_label: "Outline"
 toc_icon: "fa fa-spinner fa-spin"
@@ -14,8 +14,8 @@ toc_sticky: True
 description: We build on top of the Python Flask Webhook Receiver. Add a WebUI to view the log. Most of the HTML code would be bootstrapped. And we will talk about flask and Jinja2 relationship
 categories: posts
 sitemap: true
-published: true
-pkeywords: Python, Automation, Cisco, Devnet, DevOps, Flask, webhook, bootstrap, jinja2
+published: false
+pkeywords: Python, Automation, Devnet, Devops, Flask, docker, webhook, dockerfile, image, container, dockerise, dockerize, slim
 ---
 Taking the Python Flask Webhook Receiver to the next level, but still exploring the power of Flask. We are using Flask to display the content of the json file, which we used to store all the webhook we received. We will use and discuss a technique of building HTML called Bootstrap.
 
