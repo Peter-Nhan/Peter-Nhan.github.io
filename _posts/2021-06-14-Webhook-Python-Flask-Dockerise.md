@@ -576,6 +576,7 @@ python        slim      609da079b03a   2 weeks ago          115MB
 python        3.9.1     2a93c239d591   4 months ago         885MB
 ```
 Notice it left the previous built image behind. No big deal - easily cleaned up manually with the "docker image rm db6bc5a66104" where db6bc5a66104 is the IMAGE ID.
+
 ***
 ### Summary
 We have come along way, 2 post ago, we were talking webhooks, python and the power of flask. We were also discussing bootstrapping HTML code. Now we have taken that and turn it into a functioning docker application.
