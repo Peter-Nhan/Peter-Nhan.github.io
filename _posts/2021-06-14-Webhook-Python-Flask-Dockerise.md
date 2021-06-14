@@ -370,18 +370,18 @@ $
 
 ***
 ### Next Level It! docker-compose
-Docker-compose is taking docker containers to the next level. With this one yml file you can build and run one more containers. It can also be used in development environment when you python code keeps changing, and you are sick of going through the process of stop/remove containers, and re-build new image. Then start the containers up again.
+Docker-compose is taking docker containers to the next level. With this one yml file you can build and launch more than containers at the same time. It can also be used in development environment when your python code keeps changing, and you are sick of going through the process of stop/remove containers, and re-build new image. Then start the containers up again.
 
 The content of docker-compose.yml
-
-```dockerfile
+{% highlight dockerfile linenos %}
 version: "3.8"
 services:
   app:
     build: .
     ports:
       - "5443:5443"
-```
+{% endhighlight %}
+
 * **build** - specify the location of Dockerfile
 * **ports** - help map out the TCP port mapping - usually done with "docker build ..."
 * **version** - is to tell docker-compose, what format the yml file was written for,
