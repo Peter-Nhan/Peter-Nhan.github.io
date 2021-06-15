@@ -392,7 +392,7 @@ To kick it off - make sure this command issue in the same folder as where docker
 
 {: .notice--info} 
 <i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Notice:</b><br>
-It created a new network, and with a new IP address range - 172.18.0.2
+It created a new network called "webhook_default", and with a new IP address range - 172.18.0.2
 
 ```bash
 $ sudo docker-compose up
