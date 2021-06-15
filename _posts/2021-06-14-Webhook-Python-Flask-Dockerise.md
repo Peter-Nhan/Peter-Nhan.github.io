@@ -79,7 +79,7 @@ The two criteria I had were:
 - Ease of usage
 - Disk size utilisation
 
-To test these, I change the first line in the Dockerfile, where it begins with "FROM" followed by one of the below listed candidates:
+To test these, I change the first line in the Dockerfile, where it begins with "FROM" followed by one of the below listed candidates, one at a time:
 - python:alpine
 - python:slim
 - python:3.9.1 
