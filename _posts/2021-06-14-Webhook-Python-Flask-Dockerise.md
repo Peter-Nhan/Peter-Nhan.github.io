@@ -46,7 +46,7 @@ CMD [ "python3", "flask_rx_web_view.py"]
 - Line 4 - "pip install" install all the python3 required files to use the python code.
 - Line 5 - This kicks off the self contained app = "python3 flask_rx_web_view.py"
 
-To build the docker image from the Dockerfile. You must be in the same directory as Dockerfile file.
+To build the docker image from the Dockerfile. You must be in the same directory as Dockerfile file, before you can use the "docker build" command.
 
 Directory structure used:
 ```bash
@@ -63,15 +63,15 @@ Directory structure used:
 └── userpass_base64.py
 ```
 
-{: .notice--info} 
-<i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Tip:</b><br>
-Depending on your installation of docker, you may need the 'sudo' option in front of the docker command. 
-
 ```bash
 $ sudo docker build -t docker-webhook-slim:latest .
 ```
 - **docker-webhook-slim:latest** this is where you specify the name of the image 
 - **.** the trailing period " . " is used to specified where it should look for the Dockerfile. The " . " means in current folder where the command was issued.
+
+{: .notice--info} 
+<i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Tip:</b><br>
+Depending on your installation of docker, you may need the 'sudo' option in front of the docker command. 
 
 ***
 ### Which base image to use
