@@ -40,7 +40,7 @@ RUN pip install -r requirements.txt
 CMD [ "python3", "flask_rx_web_view.py"]
 {% endhighlight %}
 
-- Line 1 - python image slim base image - docker build will use this create the image. More details below, as we explore which base image is the best to use - in terms of size and ease of use. 
+- Line 1 - python slim base image - docker build will use this create the image. More details below, as we explore which base image is the best to use - in terms of size and ease of use. 
 - Line 2 - we add all the files and folder into the image under a folder called "python-flask".
 - Line 3 - makes the working directory that folder so that when we use the "pip install" commands it will pick up the "requirements.txt" file.
 - Line 4 - "pip install" install all the python3 required files to use the python code.
