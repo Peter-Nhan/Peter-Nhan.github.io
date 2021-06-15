@@ -487,7 +487,7 @@ CONTAINER ID   IMAGE         COMMAND                  CREATED              STATU
 c
 ```
 
-With one command, we can stop and delete the container. With the only thing left is the image.
+With one command, we can stop and delete the container. The only thing left is the image.
 ```bash
 $ sudo docker-compose down
 Stopping webhook_app_1 ... done
@@ -505,7 +505,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 $
 ```
 
-If you make changes the python code or anything within the folder. All you have to do is "docker-compose up --build". And it will rebuild the image, and start the container again. So cool !
+If you make changes to the python code or anything within the folder, and we want to update the docker image with the changes.  All you have to do is "docker-compose up --build". And it will rebuild the image, and start the container again. So cool !
 ```bash
 $ sudo docker-compose up --build -d
 Creating network "webhook_default" with the default driver
@@ -577,11 +577,11 @@ webhook_app   latest    e34029941778   About a minute ago   147MB
 python        slim      609da079b03a   2 weeks ago          115MB
 python        3.9.1     2a93c239d591   4 months ago         885MB
 ```
-Notice it left the previous built image behind. No big deal - easily cleaned up manually with the "docker image rm db6bc5a66104" where db6bc5a66104 is the IMAGE ID.
+Notice it left the previous built image behind (IMAGE ID = db6bc5a66104" - see above). No big deal - easily cleaned up manually with the "docker image rm db6bc5a66104" where db6bc5a66104 is the IMAGE ID.
 
 ***
 ### Summary
-We have come along way, 2 post ago, we were talking about webhooks, python and the power of flask. We were also discussing bootstrapping HTML code. Now we have taken that and turn it into a functioning docker application.
+We have come along way from 2 posts ago, we were talking about webhooks, python and the power of flask. We were also discussing bootstrapping HTML code. To now, we have taken all that and turn it into a functioning docker application. Which we can spin up and down easily.
 <br>Hopefully, you have found it useful.
 
 As always, please reach out if you have any questions or comments or suggestions.<br>
