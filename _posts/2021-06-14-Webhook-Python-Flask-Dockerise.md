@@ -92,14 +92,14 @@ $ sudo docker build -t docker-webhook:latest .
 ```
 ***
 ### Ease of use
-This is a simple test. 
-Can I use the base image from docker without compiling extra bits and pieces?
+This is a simple test. To answer the following question:
+Can I use the base image from docker as is without having to compile extra bits and pieces?
 
 During the docker build python:slim and python:3.9.1 passed - no issues encountered.
 
-While with Alpine, it failed to pip install "cryptography". Some python dependency are written in C and these needed to be compiled. Alpine based image has some of these "extra" things removed to make the base image size small. It is not worth the time to investigate and fix these issues.
+While testing with Alpine, it failed to pip install "cryptography". Some python dependency are written in C and these needed to be compiled. Alpine based image has some of these "extra" things removed to make the base image size small. It is not worth the time to investigate and fix these issues.
 
-Below is a snippet of the failure docker build, when trying to use the alpine based image:
+Below is a snippet of the failed docker build, when trying to use the alpine based image:
 ```bash
 $ sudo docker build -t docker-webhook-alpine:latest .
 Sending build context to Docker daemon   29.7kB
@@ -143,7 +143,7 @@ ERROR: No matching distribution found for cryptography==3.4.7
 
 ```
 
-Output when building slim base image:
+Output when building with the slim base image:
 ```bash
 $ sudo docker build -t docker-webhook-slim:latest .
 Sending build context to Docker daemon  28.67kB
@@ -340,7 +340,7 @@ $ sudo docker inspect Webhook-App | grep -A 50 NetworkSetting
 
 {: .notice--info} 
 <i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Tip:</b><br>
-Previous "docker run" leaves you attached to the container, to run the container detached use the "-d". <br>
+Previous "docker run" leaves you attached to the container, to run the container detached or headless use the "-d". <br>
 Otherwise Ctrl-C will kill your container, and you will have to restart it with: <br>
 $ sudo docker restart Webhook-App
 
@@ -371,7 +371,7 @@ $
 
 ***
 ### Next Level It! Docker-compose
-Docker-compose is taking those simple docker commands we saw above to the next level. With one yml file you can build and launch more than containers at the same time. It can also be used in development environment when your python code keeps changing, and you are sick of going through the process of stop/remove containers, and re-build new image. Then start the containers up again.
+Docker-compose is taking those simple docker commands we saw above to the next level. With one yml file (docker-compose.yml), you can build and launch more than containers at the same time. What I find appealing is that it can be used in development environment when your python code keeps changing, and you are sick of going through the process of stop/remove containers, and re-build new image. Then start the containers up again.
 
 ### Code Breakdown - docker-compose.yml
 The content of docker-compose.yml
