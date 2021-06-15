@@ -46,7 +46,7 @@ CMD [ "python3", "flask_rx_web_view.py"]
 - Line 4 - "pip install" install all the python3 required files to use the python code.
 - Line 5 - This kicks off the self contained app = "python3 flask_rx_web_view.py"
 
-To build the docker image from the Dockerfile. You must be in the same directory as Dockerfile to use the command
+To build the docker image from the Dockerfile. You must be in the same directory as Dockerfile file.
 
 Directory structure used:
 ```bash
