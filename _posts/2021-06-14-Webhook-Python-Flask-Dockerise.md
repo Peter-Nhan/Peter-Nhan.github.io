@@ -390,6 +390,10 @@ services:
 
 To kick it off - make sure this command issue in the same folder as where docker-compose.yml, Dockerfile, and actually where all the other files are.
 
+{: .notice--info} 
+<i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Notice:</b><br>
+It created a new network, and with a new IP address range - 172.18.0.2
+
 ```bash
 $ sudo docker-compose up
 Creating network "webhook_default" with the default driver
@@ -581,7 +585,7 @@ Notice it left the previous built image behind (IMAGE ID = db6bc5a66104" - see a
 
 ***
 ### Summary
-We have come along way from 2 posts ago, we were talking about webhooks, python and the power of flask. We were also discussing bootstrapping HTML code. To now, we have taken all that and turn it into a functioning docker application. Which we can spin up and down easily.
+We have come along way from 2 posts ago. We were talking about webhooks, python and the power of flask. As well as discussing bootstrapping HTML code. To now, where we have taken all that and turn it into a functioning docker application. Which we can spin up and down easily.
 <br>Hopefully, you have found it useful.
 
 As always, please reach out if you have any questions or comments or suggestions.<br>
