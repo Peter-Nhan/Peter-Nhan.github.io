@@ -65,7 +65,7 @@ Directory structure used:
 
 {: .notice--info} 
 <i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Tip:</b><br>
-Depending on your installation of docker on your O/S, you may need the 'sudo' option in front of the docker command. 
+Depending on your installation of docker, you may need the 'sudo' option in front of the docker command. 
 
 ```bash
 $ sudo docker build -t docker-webhook-slim:latest .
