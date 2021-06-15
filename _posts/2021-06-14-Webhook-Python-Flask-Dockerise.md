@@ -388,7 +388,7 @@ services:
 * **ports** - help map out the TCP port mapping - usually done with "docker build ..."
 * **version** - is to tell docker-compose, what format the yml file was written for,
 
-To kick it off - make sure this command issue in the same folder as where docker-compose.yml, Dockerfile, and actually where all the other files are.
+To kick it off - make sure this command issue in the same folder as where docker-compose.yml, Dockerfile, and where all the other files are.
 
 {: .notice--info} 
 <i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Notice:</b><br>
