@@ -24,7 +24,7 @@ Our requirements are quite straight-forward:
 - No need to have external volume to backup our json file, as our app provides the ability to download(backup) the received notifications json file.
 - If we make adjustments to the python file, we need to be able to easily re-build the docker image.
 
-To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver){: .btn .btn--primary}.
+To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver){: .btn .btn--primary}
 
 We will be paying close attention to the following files:
 - Dockerfile - this is the file we will use to build our docker image. The focus here is what to package the image with.
@@ -256,7 +256,8 @@ Compressed Size* from Docker hub.
 Looks like our Flask Webhook receiver app adds about 32 MB on top of the Base image size.
 Using Python Slim is an easy choice - it is 6 times smaller than python:3.9.1 and it passed the "Ease of use" test.
 
-The full list of docker python base images are available from [Docker Official Images](https://hub.docker.com/_/python?tab=tags&page=1&ordering=last_updated)
+The full list of docker python base images are available from [Docker Official Images](https://hub.docker.com/_/python?tab=tags&page=1&ordering=last_updated){: .btn .btn--primary}
+
 ***
 ### Start our first container
 Let's start the slim based image.
