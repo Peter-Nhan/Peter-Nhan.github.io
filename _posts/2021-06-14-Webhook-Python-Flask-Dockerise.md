@@ -339,7 +339,7 @@ $ sudo docker inspect Webhook-App | grep -A 50 NetworkSetting
 ]
 ```
 
-[![](/assets/images/2021-06-14-DockerBridgeNetwork.png)](/assets/images/2021-06-14-DockerBridgeNetwork.png)
+[![](/assets/images/2021-06-14-DockerBridgeNetwork.png){: .align-center}](/assets/images/2021-06-14-DockerBridgeNetwork.png)
 
 {: .notice--info} 
 <i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Tip:</b><br>
