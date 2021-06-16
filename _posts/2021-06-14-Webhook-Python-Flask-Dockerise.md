@@ -341,7 +341,7 @@ $ sudo docker inspect Webhook-App | grep -A 50 NetworkSetting
 
 {: .notice--info} 
 <i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Tip:</b><br>
-Previous "docker run" leaves you attached to the container, to run the container detached or headless use the "-d". <br>
+Previous "docker run" leaves you attached to the container. To run the container detached or headless mode use the "-d" option. <br>
 Otherwise Ctrl-C will kill your container, and you will have to restart it with: <br>
 $ sudo docker restart Webhook-App
 
