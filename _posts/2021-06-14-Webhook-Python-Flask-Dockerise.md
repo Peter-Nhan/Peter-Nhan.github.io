@@ -21,7 +21,7 @@ We will now dockerise the Python Flask Webhook Receiver, that we built over the 
 
 Our requirements are quite straight-forward:
 - The docker image should be quite small, as we are not doing need anything fancy. Keeping it simple.
-- No need to have external volume to backup our json file, as our app provides the ability to download(backup) received notifications json file.
+- No need to have external volume to backup our json file, as our app provides the ability to download(backup) the received notifications json file.
 - If we make adjustments to the python file, how to make it easier to re-build the app.
 
 To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver).
