@@ -351,7 +351,7 @@ sudo docker run --name Webhook-App -d -p 5443:5443 docker-webhook-slim:latest
 ```
 
 **List of useful commands:**
-<br>Check the status of a running container.
+<br>To check the status of a running container.
 ```bash
 $ sudo docker container ls -a
 CONTAINER ID   IMAGE                        COMMAND                  CREATED       STATUS       PORTS                    NAMES
