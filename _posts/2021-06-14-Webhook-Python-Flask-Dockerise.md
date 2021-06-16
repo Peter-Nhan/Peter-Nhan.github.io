@@ -24,7 +24,7 @@ Our requirements are quite straight-forward:
 - No need to have external volume to backup our json file, as our app provides the ability to download(backup) the received notifications json file.
 - If we make adjustments to the python file, we need to be able to easily re-build the docker image.
 
-To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver).
+To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver){: .btn .btn--primary}.
 
 We will be paying close attention to the following files:
 - Dockerfile - this is the file we will use to build our docker image. The focus here is what to package the image with.
@@ -54,6 +54,7 @@ Directory structure used:
 ├── all_webhooks_detailed.json
 ├── config.py
 ├── Dockerfile
+├── docker-compose.yml
 ├── flask_rx.py
 ├── flask_rx_web_view.py
 ├── requirements.txt
