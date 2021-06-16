@@ -13,8 +13,9 @@ This blog is to help document things I have been exploring and playing with.
 
 Hopefully it will help you in a way, as it is a way for me to document things for my 'future' self as my 'current' self will tend to forget things. :-)
 
-Below is a dynamic list, message me (LinkedIn/signal/whatsapp...morse code..smoke signal) if you are exploring something interesting that I should look into as well.
+Message me (LinkedIn/signal/whatsapp...morse code..smoke signal) and let me know if you are exploring something interesting that I should look into as well.
 
+Below is a dynamic list I am exploring:
 ### Current things
 - Webhooks with Python 
 - Terraform
