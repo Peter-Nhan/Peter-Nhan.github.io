@@ -215,6 +215,7 @@ Successfully tagged docker-webhook-slim:latest
 ```
 
 Based on these test, I am NOT going to use the Alpine based image, as it will need more work to make it usable.
+
 ***
 ### Disk size
 By changing the first line in Dockerfile, we can test which based image we will use based on size.
@@ -344,7 +345,7 @@ Previous "docker run" leaves you attached to the container, to run the container
 Otherwise Ctrl-C will kill your container, and you will have to restart it with: <br>
 $ sudo docker restart Webhook-App
 
-docker run with detach '-d' option.
+To use "docker run" with detach '-d' option.
 ```bash
 sudo docker run --name Webhook-App -d -p 5443:5443 docker-webhook-slim:latest
 ```

@@ -9,7 +9,7 @@
 $doc-font-size: 16 !default;
 
 /* paragraph indention */
-$paragraph-indent: false !default; // true, false (default)
+$paragraph-indent: false !default; // true, false (default) 
 $indent-var: 1.3em !default;
 
 /* system typefaces */
@@ -148,7 +148,7 @@ $small: 600px !default;
 $medium: 768px !default;
 $medium-wide: 900px !default;
 $large: 1024px !default;
-$x-large: 1280px !default;
+$x-large: 1920px !default; // 1280 pnhan
 $max-width: $x-large !default;
 
 /*
