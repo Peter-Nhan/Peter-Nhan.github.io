@@ -26,7 +26,7 @@ Our requirements are quite straight-forward:
 
 To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver).
 
-We will be paying close attention to:
+We will be paying close attention to the following files:
 - Dockerfile - this is the file we will use to build our docker image. The focus here is what to package the image with.
 - docker-compose.yml - this file we will use with docker-compose to define and run docker container.
 
