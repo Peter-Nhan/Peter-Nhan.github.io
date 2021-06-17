@@ -19,7 +19,7 @@ pkeywords: Python, Automation, Cisco, Devnet, DevOps, Flask, webhook, bootstrap,
 ---
 Taking the Python Flask Webhook Receiver to the next level, but still exploring the power of Flask. We are using Flask to display the content of the json file, which we used to store all the webhook we received. We will use and discuss a technique of building HTML called Bootstrap.
 
-To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver).
+To follow along, the files are available here. [Github](https://github.com/Peter-Nhan/Flask_webhook_receiver){: .btn .btn--primary}
 
 {: .notice--info} 
 <i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Important:</b><br>
@@ -90,7 +90,7 @@ They have made it so easy to get a decent website up and running. They provide a
 
 I used their example Navbar to build what you see above demo - [https://getbootstrap.com/docs/5.0/components/navbar/](https://getbootstrap.com/docs/5.0/components/navbar/)
 
-Buttons looked pretty cool too - https://getbootstrap.com/docs/4.0/components/buttons/
+Buttons looked pretty cool too - [https://getbootstrap.com/docs/4.0/components/buttons/](https://getbootstrap.com/docs/4.0/components/buttons/)
 
 I have already heavily commented the included HTML template(bootstrap.html). Most of it, is about making the webpage look decent. But I will go through the core part of the HTML template that produces the dynamic content you see.
 
