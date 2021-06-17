@@ -36,7 +36,7 @@ Your IP address of the device you are running the python code maybe different to
 
 The top of the web page has a navigation bar, that has options to allow you to manually refreshed the page and a button to download the json file. These were added by "bootstrapping" the HTML in the template folder. More details below.
 
-[![](/assets/images/2021-06-03_Auto_Refresh_animated.gif)](/assets/images/2021-06-03_Auto_Refresh_animated.gif)
+[![](/assets/images/2021-06-03_Auto_Refresh_animated.gif){: .align-center}](/assets/images/2021-06-03_Auto_Refresh_animated.gif)
 
 ```bash
 $ python3 flask_rx_web_view.py
