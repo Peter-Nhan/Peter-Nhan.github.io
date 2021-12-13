@@ -128,8 +128,7 @@ Open the folder in finder where all the python scripts should exist - place your
 
 ***
 ### Summary
-We have come along way from 2 posts ago. We were talking about webhooks, python and the power of flask. As well as discussing bootstrapping HTML code. To now, where we have taken all that and turn it into a functioning docker application. Which we can spin up and down easily.
-<br>Hopefully, you have found it useful.
-
+As you can see, it is pretty straight forward to automate in Iterm2 any repetitive task.
+Hopefully you found it useful.
 As always, please reach out if you have any questions or comments or suggestions.<br>
 <i class="far fa-comment-dots fa-2x"></i>
