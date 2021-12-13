@@ -23,7 +23,7 @@ pkeywords: Python, Automation, iterm2, scripting, console, ssh, telnet, lab, ses
 ---
 If you are like me and love to use Iterm2 but hate repeatedly spinning multiple session in individual tabs and setting the badge for each every time manually.
 And you do not want to setup profile for each session. 
-Then here is something that might help you - I have multiple individual python3 scripts in Iterm2. I would execute a particular script and that would spin up all the session that I need for the type of sessions/environment I need.
+Then here is something that might help you - I have multiple individual python3 scripts in Iterm2. I would execute a particular script and that would spin up all the sessions that I need for the type of sessions/environment I need at the time.
 
 Here is an animated gif to demonstrate what I mean.
 
