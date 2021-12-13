@@ -21,7 +21,7 @@ sitemap: true
 published: true
 pkeywords: Python, Automation, iterm2, scripting, console, ssh, telnet, lab, session
 ---
-If you are like me and love to us Iterm2 but hate repeatedly spinning multiple session in individual tabs and setting the badge for each every time manually.
+If you are like me and love to use Iterm2 but hate repeatedly spinning multiple session in individual tabs and setting the badge for each every time manually.
 And you do not want to setup profile for each session. 
 Then here is something that might help you - I have multiple individual python3 scripts in Iterm2. I would execute a particular script and that would spin up all the session that I need for the type of sessions/environment I need.
 
@@ -113,6 +113,18 @@ WLC C9800-1,ssh admin@192.168.1.2
 WLC C9800-2,telnet 192.168.1.3
 {% endhighlight %}
 
+***
+### Iterm2 Dependency - Python Runtime
+If you never have never used Iterm2 and the python automation feature. You may have to install Iterm2 Python runtime (100MB+).
+To trigger to the automatic installation. Scripts -> Manage -> New Python Script as shown below:
+
+[![](/assets/images/2021-12-12_Iterm_menu.png)](/assets/images/2021-12-12_Iterm_menu.png)
+
+[![](/assets/images/2021-12-12_InstallPythonRuntime.png)](/assets/images/2021-12-12_InstallPythonRuntime.png)
+
+Open the folder in finder where all the python scripts should exist - place your python scripts and csv files here.
+
+[![](/assets/images/2021-12-12_RevealScriptsInFinder)](/assets/images/2021-12-12_RevealScriptsInFinder)
 
 ***
 ### Summary
