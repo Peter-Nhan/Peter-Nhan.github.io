@@ -124,7 +124,7 @@ To trigger to the automatic installation. Scripts -> Manage -> New Python Script
 
 Open the folder in finder where all the python scripts should exist - place your python scripts and csv files here.
 
-[![](/assets/images/2021-12-12_RevealScriptsInFinder)](/assets/images/2021-12-12_RevealScriptsInFinder)
+[![](/assets/images/2021-12-12_RevealScriptsInFinder.png)](/assets/images/2021-12-12_RevealScriptsInFinder.png)
 
 ***
 ### Summary
