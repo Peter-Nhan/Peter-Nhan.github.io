@@ -54,7 +54,7 @@ To follow along, the files are available here. [Github](https://github.com/Peter
 ### Code break down
 > Analysis of wise-bot.py  - Telegram Wise Python Bot
 
-Python file *wise-bot.py* needs the two API keys to be updated before we can proceed:
+Python file *wise-bot.py* needs the two API keys to be updated before we can proceed, see above on how to get them:
 - Line 8 - Needs the TransferWise Auth Token (API Key) 
 - Line 10 - Needs the Telegram Bot Token (API Token)
 - Line 12 - check currency every 600 seconds - can be modified to what ever you like
