@@ -37,6 +37,7 @@ Outline of the Telegram app commands implemented:
 /tw_now - currency checks now
 
 [![](/assets/images/2021-12-14-Wise.gif)](/assets/images/2021-12-14-Wise.gif)
+
 ***
 ### Prerequisites
 Before we proceed, there are some pre-requisites:
