@@ -63,7 +63,7 @@ Python file *wise-bot.py* needs the two API keys to be updated before we can pro
 - Line 50-71 - function that takes the exchange rate from the user and kicks off the tw_check function for re-occurring
 - Line 73-79 - function cancels the re-occurring currency checks
 - Line 81-86 - function that returns the currency now
-- Line 106-110 - the mapping of keywords that Python is listening on and the function that will be triggered if there is a match.
+- Line 106-110 - the mapping of keywords that Python is listening on from Telegram and the function that will be triggered if there is a match.
 
 {% highlight python linenos %}
 #!/usr/local/bin/python3
