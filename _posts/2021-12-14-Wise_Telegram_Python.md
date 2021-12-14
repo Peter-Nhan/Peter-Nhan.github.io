@@ -19,21 +19,22 @@ pkeywords: Python, Automation, Wise, TransferWise, Telegram, Bot
 ---
 I have been using Wise or Transferwise (old name) for a while now. For those who do not know, Wise allows you to do currency exchange and transfer money around the world at a low cost. I am not sponsored by them, happy to be ... hint hint.. :-)
 
-Jokes aside, when I found out there was API available to interact with the Wise platform I was quite excited. One of the biggest pain point for me in using the platform or the APP is that it does not let you set a target exchange rate to trigger the transfer. So you had to manually check the App or webpage constantly.
+Jokes aside, when I found out there was API available to interact with the Wise platform I was quite excited. One of the biggest pain point for me in using the platform or the App, is that it does not let you set a target exchange rate to trigger the transfer. So you had to manually check the App or webpage constantly.
 
 For this blog, I want to focus on the basic functionality. I want to be informed when the AUD to USD exchange rate hit my target. So that I can manually trigger the conversion. I want Telegram app to send me an alert when the target has reached.
 I also want to set my target through the Telegram App and have python check the exchange rate every 10 minutes (can be modified) and have the ability to turn off the alert via the Telegram App as well.
 
-Outline of the Telegram app commands:
+Currently, I have the python3 code running on my raspberry pi at home. The Python3 leverages Telegram API to monitor the bot for activity and to send messages to the bot.
+
+Outline of the Telegram app commands implemented:
 /tw_on <AUD_USD target> - check exchange rate every '+str(tw_check_interval)+' seconds - if checked exchange rate is better or equal to the target exchange rate then Send Message
 /tw_off - turn off currency checks
 /tw_now - currency checks now
 
 [![](/assets/images/2021-12-14-Wise.gif)](/assets/images/2021-12-14-Wise.gif)
 
-
 Before we proceed, there are some pre-requisites:
-* [Register for a Wise Sandbox Free account](https://sandbox.transferwise.tech/register/){:target="_blank"} and then grab the API Key. We need this API Key to talk to the Wise sandbox. Please do not share with anyone. 
+* [Register for a Free Wise Sandbox account](https://sandbox.transferwise.tech/register/){:target="_blank"} and then grab the API Key. We need this API Key to talk to the Wise sandbox. This way we can use the Wise API that is available. Wise API reference link below. Please do not share the API key with anyone. 
 [![](/assets/images/2021-12-14-WiseAPIKey.png)](/assets/images/2021-12-14-WiseAPIKey.png)
 
 * Create a bot in Telegram to get the Token for the bot. Start off by adding BotFather to your telegram and follow the steps in the screenshots below to create a bot of your own. Use you own "Name for your bot" and username for your bot. Grab the API token from BotFather - do not share with anyone
