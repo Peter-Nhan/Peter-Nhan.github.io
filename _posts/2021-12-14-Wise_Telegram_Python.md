@@ -24,7 +24,9 @@ Jokes aside, when I found out there was API available to interact with the Wise 
 For this blog, I want to focus on the basic functionality. I want to be informed when the AUD to USD exchange rate hit my target. So that I can manually trigger the conversion. I want Telegram app to send me an alert when the target has reached.
 I also want to set my target through the Telegram App and have python check the exchange rate every 10 minutes (can be modified) and have the ability to turn off the alert via the Telegram App as well.
 
-Currently, I have the python3 code running on my raspberry pi at home. The Python3 leverages Telegram API to monitor the bot for activity and to send messages to the bot.
+***
+### My Setup
+Currently, I have the python3 code running on my Raspberry Pi at home. The Python3 leverages Telegram API to monitor the bot for activity and to send messages to the bot.
 
 Outline of the Telegram app commands implemented:
 
