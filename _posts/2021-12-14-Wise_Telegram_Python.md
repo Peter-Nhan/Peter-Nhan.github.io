@@ -26,7 +26,7 @@ I also want to set my target through the Telegram App and have python check the 
 
 ***
 ### My Setup
-Currently, I have the python3 code running on my Raspberry Pi at home. The Python3 leverages Telegram API to monitor the bot for activity and to send messages to the bot.
+Currently, I have the python3 code running on my Raspberry Pi at home. The Python3 code leverages Telegram API to monitor the bot for activity and to send messages to the bot. The code also uses the Wise API to check for currency exchange rates.
 
 Outline of the Telegram app commands implemented:
 
