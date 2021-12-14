@@ -27,12 +27,16 @@ I also want to set my target through the Telegram App and have python check the 
 Currently, I have the python3 code running on my raspberry pi at home. The Python3 leverages Telegram API to monitor the bot for activity and to send messages to the bot.
 
 Outline of the Telegram app commands implemented:
+
 /tw_on <AUD_USD target> - check exchange rate every '+str(tw_check_interval)+' seconds - if checked exchange rate is better or equal to the target exchange rate then Send Message
+
 /tw_off - turn off currency checks
+
 /tw_now - currency checks now
 
 [![](/assets/images/2021-12-14-Wise.gif)](/assets/images/2021-12-14-Wise.gif)
-
+***
+### Prerequisites
 Before we proceed, there are some pre-requisites:
 * [Register for a Free Wise Sandbox account](https://sandbox.transferwise.tech/register/){:target="_blank"} and then grab the API Key. We need this API Key to talk to the Wise sandbox. This way we can use the Wise API that is available. Wise API reference link below. Please do not share the API key with anyone. 
 [![](/assets/images/2021-12-14-WiseAPIKey.png)](/assets/images/2021-12-14-WiseAPIKey.png)
