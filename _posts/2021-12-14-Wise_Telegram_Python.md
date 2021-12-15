@@ -32,7 +32,7 @@ Currently, I have the python3 code running on my Raspberry Pi at home. The Pytho
 
 Outline of the Telegram app commands implemented:
 
-**/tw_on <AUD_USD target>** - check exchange rate every 600 seconds - if checked exchange rate is better or equal to the target exchange rate then Send Message
+**/tw_on** <AUD_USD target> - check exchange rate every 600 seconds - if checked exchange rate is better or equal to the target exchange rate then Send Message
 
 **/tw_off** - turn off currency checks
 
