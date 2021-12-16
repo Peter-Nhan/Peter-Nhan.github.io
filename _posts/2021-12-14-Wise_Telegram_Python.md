@@ -26,6 +26,9 @@ I also want to set my target through the Telegram App and have python check the 
 There is a Wise API to trigger the currency conversion for you but I am not so brave yet. 
 <i class="far fa-grin-beam-sweat"></i>
 
+High Level flow of API calls below.
+
+[![](/assets/images/2021-12-14-HighLevel.png)](/assets/images/2021-12-14-HighLevel.png)
 ***
 ### My Setup
 Currently, I have the python3 code running on my Raspberry Pi at home. The Python3 code leverages Telegram API to monitor the bot for activity and to send messages to the bot. The code also uses the Wise API to check for currency exchange rates.
