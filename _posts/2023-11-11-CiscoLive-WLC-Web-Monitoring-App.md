@@ -19,7 +19,17 @@ pkeywords: Python, Automation, Cisco, Devnet, Devops, Flask, nginx, Cisco, WLC
 ---
 During the recent Cisco Live Melbourne 2023. I was involved in the Cisco NOC (Network Operations) teams. We were tasked to bring our own (bump in) Cisco Networking infrastructure to the MCEC (Melbourne Convention and Exhibition Centre).
 
-Here is a simple tool to help us track Access Points deployment, and monitor the health of Wireless LAN controller. I wanted the ability to monitor it from our phones with data presented on a web page that would auto-reload.
+We needed a tool to help track AP deployment from our phones, rather than connecting from our laptop to the WLC to check progress and perform health checks.
+
+In this blog, I will discuss this simple tool I had built to help us track Access Points deployment, and monitor the health of Wireless LAN controller. I wanted the ability to monitor it from our phones with data presented on a web page that would auto-reload. 
+Python was the work horse, I used to extract data from WLC, then coupled it with:
+* Flask 
+* Gunicorn
+* NGINX 
+And then all nicely package in docker container for portability.
+
+[![](/assets/images/2023-11-11_APs.jpg)](/assets/images/2023-11-11_APs.jpg)
+
 
 
 
@@ -238,8 +248,6 @@ Payload:
 ```
 ***
 ### Firing a test from *Cisco DNAC*
-Add the webhook destination in DNAC
-[![](/assets/images/2021-05-20_destination.jpg)](/assets/images/2021-05-20_destination.jpg)
 
 Add the credential of the webhook. 
 
