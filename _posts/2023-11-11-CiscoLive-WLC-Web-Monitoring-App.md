@@ -25,13 +25,15 @@ In this blog, I will discuss the tool I had built to help us track Access Points
 
 [![](/assets/images/2023-11-11_APs.jpg)](/assets/images/2023-11-11_APs.jpg)
 
-### Tools used
+### Items used
 * Python - was the work horse, I used it extract data from WLC (netmiko), then parse the data into list of dictionary - I made a textfsm version (probably next blog)
 * Flask Python class - Use to create our WSGI application, which renders a dynamic web page - using static web page templates and the data extracted from the WLC.
 * Gunicorn - Flask should not be used alone in production environment since is a web framework and not a web server. Gunicorn takes the WSGI Application and translates HTTP requests into something Python can understand.
 * NGINX -  public handler (reverse proxy) for incoming requests and scales to thousands of simultaneous connections.
 
-And then we nicely package it all together with docker container service chaining.
+And then we nicely package it all together with two docker containers:
+* Gunicorn container - has Gunicorn with the Flask App.
+* NGINX container - providing reverse proxy for the Gunicorn container.
 
 [![](/assets/images/2023-11-11-Docker-HighLevel.png)](/assets/images/2023-11-11-Docker-HighLevel.png)
 
