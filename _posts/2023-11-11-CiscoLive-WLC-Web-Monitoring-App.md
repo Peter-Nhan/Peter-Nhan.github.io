@@ -21,10 +21,12 @@ During the recent Cisco Live Melbourne 2023. I was involved in the Cisco NOC (Ne
 
 We needed a tool to help track AP deployment from our phones, rather than connecting from our laptop to the WLC to check progress and perform health checks.
 
-In this blog, I will discuss this simple tool I had built to help us track Access Points deployment, and monitor the health of Wireless LAN controller. I wanted the ability to monitor it from our phones with data presented on a web page that would auto-reload. 
-Python was the work horse, I used to extract data from WLC, then coupled it with:
-* Flask 
-* Gunicorn
+In this blog, I will discuss this simple tool I had built to help us track Access Points deployment, and monitor the health of Wireless LAN controller. I wanted to have the ability to monitor it from our phones with data presented on a web page that would auto-reload. Our phones could VPN to the network to access WLC if we are in an area where the Access-Points have not being onboarded yet.
+
+### Summary of items used
+Used many ingredients to create this web app.
+* Python - the work horse - 'netmiko' to extract data from WLC, and flask to present the data as a dynamic web page.
+* Gunicorn - 
 * NGINX 
 And then all nicely package in docker container for portability.
 
