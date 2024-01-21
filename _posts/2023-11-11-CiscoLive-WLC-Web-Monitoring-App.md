@@ -21,16 +21,19 @@ During the recent Cisco Live Melbourne 2023. I was involved in the Cisco NOC (Ne
 
 We needed a tool to help track AP deployment from our phones, rather than connecting from our laptop to the WLC to check progress and perform health checks.
 
-In this blog, I will discuss this simple tool I had built to help us track Access Points deployment, and monitor the health of Wireless LAN controller. I wanted the ability to monitor it from our phones with data presented on a web page that would auto-reload. 
-Python was the work horse, I used to extract data from WLC, then coupled it with:
-* Flask 
-* Gunicorn
-* NGINX 
-And then all nicely package in docker container for portability.
+In this blog, I will discuss the tool I had built to help us track Access Points deployment, and monitor the health of Wireless LAN controller. I wanted the ability to monitor things from our phones with data presented on a web pages that would auto-reload. 
 
 [![](/assets/images/2023-11-11_APs.jpg)](/assets/images/2023-11-11_APs.jpg)
 
+### Tools used
+* Python - was the work horse, I used it extract data from WLC (netmiko), then parse the data into list of dictionary - I made a textfsm version (probably next blog)
+* Flask Python class - Use to create our WSGI application, which renders a dynamic web page - using static web page templates and the data extracted from the WLC.
+* Gunicorn - Flask should not be used alone in production environment since is a web framework and not a web server. Gunicorn takes the WSGI Application and translates HTTP requests into something Python can understand.
+* NGINX -  public handler (reverse proxy) for incoming requests and scales to thousands of simultaneous connections.
 
+And then we nicely package it all together with docker container service chaining.
+
+[![](/assets/images/2023-11-11-Docker-HighLevel.png)](/assets/images/2023-11-11-Docker-HighLevel.png)
 
 
 Exploring the power of Python Flask. We will use Flask to act as a Webhook Receive and we will test firing webhooks notification at it via curl, python code and Cisco DNAC. 
