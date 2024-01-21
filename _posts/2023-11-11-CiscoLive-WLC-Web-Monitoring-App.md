@@ -37,6 +37,11 @@ And then we nicely package it all together with two docker containers:
 
 [![](/assets/images/2023-11-11-Docker-HighLevel.png)](/assets/images/2023-11-11-Docker-HighLevel.png)
 
+Most of the work done within the Flask App by establishing an SSH session to the WLC using Netmiko Library. Then collect and parsing the following commands:
+show ap summary
+show ap summary sort descending client-count
+show ap summary sort descending data-usage
+show wlan all | include Network Name|Number of Active Clients
 
 Exploring the power of Python Flask. We will use Flask to act as a Webhook Receive and we will test firing webhooks notification at it via curl, python code and Cisco DNAC. 
 Webhooks (Reverse API) is a way to send notification from one application to another application. 
