@@ -21,57 +21,81 @@ During the recent Cisco Live Melbourne 2023. I was involved in the Cisco NOC (Ne
 
 We needed a tool to help track AP deployment from our phones, rather than connecting from our laptop to the WLC to check progress and perform health checks.
 
-In this blog, I will discuss this simple tool I had built to help us track Access Points deployment, and monitor the health of Wireless LAN controller. I wanted to have the ability to monitor it from our phones with data presented on a web page that would auto-reload. Our phones could VPN to the network to access WLC if we are in an area where the Access-Points have not being onboarded yet.
-
-### Summary of items used
-Used many ingredients to create this web app.
-* Python - the work horse - 'netmiko' to extract data from WLC, and flask to present the data as a dynamic web page.
-* Gunicorn - 
-* NGINX 
-And then all nicely package in docker container for portability.
+In this blog, I will discuss the tool I had built to help us track Access Points deployment, and monitor the health of Wireless LAN controller. I wanted the ability to monitor things from our phones with data presented on a web pages that would auto-reload. 
 
 [![](/assets/images/2023-11-11_APs.jpg)](/assets/images/2023-11-11_APs.jpg)
 
+***
+### Items used
+* Python - was the work horse, I used it extract data from WLC (netmiko), then parse the data into list of dictionary - I made a textfsm version (probably next blog)
+* Flask Python class - Use to create our WSGI (Web Server Gateway Interface) application, which renders a dynamic web page - using static web page templates and the data extracted from the WLC.
+* Gunicorn - Flask should not be used alone in production environment since is a web framework and not a web server. Gunicorn takes the WSGI Application and translates HTTP requests into something Python can understand.
+* NGINX -  public handler (reverse proxy) for incoming requests and scales to thousands of simultaneous connections.
+
+And then we nicely package it all together with two docker containers:
+* Gunicorn container - has Gunicorn with the Flask App. Exposes TCP/8081 
+* NGINX container - providing reverse proxy for the Gunicorn container. Exposes TCP/8088 but maps it to port 80 internally in the container.
 
 
+[![](/assets/images/2023-11-11-Docker-HighLevel.png)](/assets/images/2023-11-11-Docker-HighLevel.png)
 
-Exploring the power of Python Flask. We will use Flask to act as a Webhook Receive and we will test firing webhooks notification at it via curl, python code and Cisco DNAC. 
-Webhooks (Reverse API) is a way to send notification from one application to another application. 
+Most of the work is done within the Flask WSGI App by establishing an SSH session to the WLC using Netmiko Library. Based on a web based query it would proceed to collect and parsing the following commands:
+* show ap summary
+* show ap summary sort descending client-count
+* show ap summary sort descending data-usage
+* show wlan all \| include Network Name \| Number of Active Clients
 
-Python Flask has been configured to support HTTPS and user authentication.
+Please Note: Image below has the AP name, IP address, and Mac address pixelated.
 
-Before we begin, some details about the Webhook Flask receiver. I modified the original source [GitHub - cisco-en-programmability](https://github.com/cisco-en-programmability/dnacenter_webhook_receiver){: .btn .btn--primary} and fork the changes here. [GitHub - Flask webhook receiver](https://github.com/Peter-Nhan/Flask_webhook_receiver){: .btn .btn--primary} <br>I enabled authentication and allow it to be reachable from the external IP address of an Ubuntu VM (Ubuntu 20.04.2 LTS)
+[![](/assets/images/2023-11-11-AP-Summary.jpg)](/assets/images/2023-11-11-AP-Summary.jpg)
 
-{: .notice--info} 
-<i class="fa fa-exclamation-triangle fa-2x" style="color:yellow"></i> <b>Important:</b><br>
-If you are playing along - remember to 'pip3 install requirements.txt'. This will install the required libraries used by the python script.
+
+Before we begin to break down the code (app.py)- you can grab a copy from  [GitHub - Flask webhook receiver](https://github.com/Peter-Nhan/Flask_webhook_receiver){: .btn .btn--primary} <br>
 
 ***
 ### Code break down
-> Analysis of flask_rx.py - Flask Webhook receiver
+> Analysis of app.py - Flask WSGI App
 
-Python file *flask_rx.py* imports the value of the username and password from *config.py*. These credentials are used by the flask web server, as well as when you post webhook notification from the *test_webhook.py*.
+Python file *app.py* has some hardcoded username and password not best practice - this post was more about demonstrating functionality. These credentials are used by the flask web netmiko to connect to the WLC.
 
-You can customise the filename that is used to save all the received webhook notification, by changing the variable 'save_webhook_output_file' in *flask_rx.py*.
+The function grab_cli_output collects show commands from the WLC.
 
 {% highlight python linenos %}
-from config import WEBHOOK_USERNAME, WEBHOOK_PASSWORD
-save_webhook_output_file = "all_webhooks_detailed.json"
+from flask import Flask, render_template, send_from_directory
+from netmiko import ConnectHandler
+import os
 
 app = Flask(__name__)
 
-app.config['BASIC_AUTH_USERNAME'] = WEBHOOK_USERNAME
-app.config['BASIC_AUTH_PASSWORD'] = WEBHOOK_PASSWORD
+def grab_cli_output(cli):
+    wlc = {
+        'device_type': 'cisco_wlc',
+        'ip': '192.168.1.1',
+        'username': 'admin',
+        'password': 'cisco123',
+        'secret': 'cisco123',
+    }
+    # Connect to the WLC
+    net_connect = ConnectHandler(**wlc)
+    net_connect.enable()
+    output = net_connect.send_command(cli)
+    # Disconnect from the WLC
+    net_connect.disconnect()
 
-# If true, then site wide authentication is needed
-app.config['BASIC_AUTH_FORCE'] = True
-
-basic_auth = BasicAuth(app)
+    return output
 {% endhighlight %}
-A number of flask route has been created - "/" and "/webhook". This determines how the flask web service should treat the incoming request.
-* "/" is used to test if the web service is running.
-* "/webhook" is used to post the webhook notification - so the full URL would be https://x.x.x.x/webhook 
-. Once the webhook notification is received by flask, we use json.dumps to print it to the screen and as well as dump it to the file.
+
+
+A number of flask route has been created. This determines how the Flask WSGI App should treat the incoming request.
+
+| Route | Command | Description |
+| :--- | :--- | :--- |
+| "/" | | Index of all available commands. |
+| "/ap_sum" | show ap summary | show total amount AP and their status. | 
+| "/ap_sum_client" |  show ap summary sort descending client-count | show AP with most client |
+| "/ap_sum_data" | show ap summary sort descending data-usage \| show AP with most data usage |
+
+
 
 {% highlight python linenos %}
 @app.route('/')  # create a route for / - just to test server is up.
