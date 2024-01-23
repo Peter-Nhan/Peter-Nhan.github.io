@@ -56,7 +56,7 @@ Before we begin to break down the code (app.py)- you can grab a copy from  [GitH
 ### Code break down
 > Analysis of app.py - Flask WSGI App
 
-Python file *app.py* has some hardcoded username and password not best practice - this post was more about demonstrating functionality. These credentials are used by the flask web netmiko to connect to the WLC.
+Python file *app.py* has some hardcoded username and password not best practice - this post was more about demonstrating functionality. These credentials are used by the netmiko to connect to the WLC.
 
 The function grab_cli_output collects show commands from the WLC.
 
@@ -93,263 +93,104 @@ A number of flask route has been created. This determines how the Flask WSGI App
 | "/" | | Index of all available commands. |
 | "/ap_sum" | show ap summary | show total amount AP and their status. | 
 | "/ap_sum_client" |  show ap summary sort descending client-count | show AP with most client |
-| "/ap_sum_data" | show ap summary sort descending data-usage \| show AP with most data usage |
+| "/ap_sum_data" | show ap summary sort descending data-usage | show AP with most data usage |
 
-
+Once the Flask WSGI APP see a request for a route it will trigger a called particular function. <br>
+For example if it receives a request for http://x.x.x.x:8081/ap_sum it will be routed to line 6 below. The App will collect and parse the "show ap summary" from the configured WLC, it will then pass the parse values to the template call 
 
 {% highlight python linenos %}
-@app.route('/')  # create a route for / - just to test server is up.
-@basic_auth.required
+@app.route('/')
 def index():
-    return '<h1>Flask Receiver App is Up!</h1>', 200
+    return render_template('index.html')
 
-@app.route('/webhook', methods=['POST'])  # create a route for /webhook, method POST
-@basic_auth.required
-def webhook():
-    if request.method == 'POST':
-        print('Webhook Received')
-        request_json = request.json
+# show ap summary
+@app.route('/ap_sum')
+def show_ap_summary():
+    output = grab_cli_output('show ap summary')
+    # Split the command output into lines
+    lines = output.splitlines()
+    # Grab total APs
+    total_ap = lines[0]
 
-        # print the received notification
-        print('Payload: ')
-        # Change from original - remove the need for function to print
-        print(json.dumps(request_json,indent=4))
+    # Remove all lines to the actual AP listing
+    # Staging-9800-CL#show ap summary
+    # Number of APs: 1
 
-        # save as a file, create new file if not existing, append to existing file
-        # full details of each notification to file 'all_webhooks_detailed.json'
-        # Change above save_webhook_output_file to a different filename
+    # CC = Country Code
+    # RD = Regulatory Domain
 
-        with open(save_webhook_output_file, 'a') as filehandle:
-            # Change from original - we output to file so that the we page works better with the newlines.
-            filehandle.write('%s\n' % json.dumps(request_json,indent=4))
-            filehandle.write('= - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - \n')
+    # AP Name                          Slots AP Model             Ethernet MAC   Radio MAC      CC   RD   IP Address                                State        Location
+    # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # CW9166_LOANER                    3     CW9166I-Z            6849.9263.a160 ac2a.a1a6.90c0 AU   -Z   10.66.128.225                             Registered   default location
+    lines = lines[7:]
 
-        return 'Webhook notification received', 202
-    else:
-        return 'POST Method not supported', 405
+    # Parse the AP details
+    ap_details = []
+    for line in lines:
+        ap_info = line.split()
+        ap_details.append({
+            'ap_name': ap_info[0],
+            'slots': ap_info[1],
+            'ap_model': ap_info[2],
+            'ether_mac': ap_info[3],
+            'radio_mac': ap_info[4],
+            'country_code': ap_info[5],
+            'radio_domain': ap_info[6],
+            'ip_address': ap_info[7],
+            'state': ap_info[8],
+            'location': ap_info[9]
+        })
+
+    # Render the template with the AP details
+    return render_template('ap_summary.html', ap_details=ap_details, total_ap=total_ap)
 {% endhighlight %}
 
-We use the app.run to specified the port 5443, HTTPS and to bind Flask to all IP addresses on the Ubuntu VM.
-{% highlight python linenos %}
-if __name__ == '__main__':
-    # HTTPS enable - toggle on eby un-commenting
-    app.run(ssl_context='adhoc', host='0.0.0.0', port=5443, debug=True)
+### Template break down
+The template uses a combination of CSS boostrap template and variable passed in from our app.py
+
+{% highlight html %}
+{% raw %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AP Summary</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-md">
+    <h1>show ap summary</h1>
+    <h2 class="text-end">{{ total_ap }}</h2>
+    <table class="table table-hover">
+        <tr>
+            <thead class="table-light">
+            <th>AP Name</th>
+            <th>Ethernet MAC Address</th>
+            <th>Radio MAC Address</th>
+            <th>IP Address</th>
+            <th>State</th>
+        </tr>
+    <tbody class="table-group-divider">
+        {% for ap in ap_details %}
+        <tr>
+            <td>{{ ap.ap_name }}</td>
+            <td>{{ ap.ether_mac }}</td>
+            <td>{{ ap.radio_mac }}</td>
+            <td>{{ ap.ip_address }}</td>
+            <td {% if ap.state == 'Registered' %} class="table-success" {% endif %}> {{ ap.state }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>
+{% endraw %}
 {% endhighlight %}
 
-### Test methodology
-We will use three different method to test the Python Flask Webhook receiver 
-
-1. Curl command to test fire a webhook subscription at the receiver, 
-2. Use another Python code - *test_webhook.py* using the request.post fire the request
-3. On the Cisco DNAC, you can subscribe to many different types of event notifications and add external destination receiver to send these notifications to. Configure DNAC with the details of the webhook receiver and we can test fire from there.
-
-[![](/assets/images/2021-05-20_Curl_test_webhook.png)](/assets/images/2021-05-20_Curl_test_webhook.png)
-
-[![](/assets/images/2021-05-20_DNAC_Webhook.png)](/assets/images/2021-05-20_DNAC_Webhook.png)
-
-{: .notice--info}
-<i class="fa fa-exclamation-triangle fa-2x fa-fw" style="color:yellow"></i> <b>Important:</b><br>
-Modify *config.py* to change the IP address in WEBHOOK_URL and TCP port to match your environment. Specify the IP address of the device running the Flask Python code. <br><br>
-WEBHOOK_URL is only used by python code *test_webhook.py* to emulate the notification transmitter. <br><br>
-Both *test_webhook.py* and *flask_rx.py* will use the WEBHOOK_USERNAME and WEBHOOK_PASSWORD values from *config.py*.
-
-{% highlight python linenos %}
-WEBHOOK_URL = 'https://172.16.1.16:5443/webhook'  # test with Flask receiver 
-WEBHOOK_USERNAME = 'username'
-WEBHOOK_PASSWORD = 'password'
-{% endhighlight %}
 ***
 
-After starting 
-```bash
-$ python3 flask_rx.py
-```
-Check if the Linux VM is listening on the port 5443.
-
-```bash
-$ sudo ss -tulpn
-Netid  State   Recv-Q  Send-Q     Local Address:Port      Peer Address:Port  Process
-. . . . SNIPPET . . . . 
-tcp    LISTEN  0       128              0.0.0.0:5443           0.0.0.0:*      users:(("python3",pid=400977,fd=4),("python3",pid=400977,fd=3),("python3",pid=400975,fd=3))
-tcp    LISTEN  0       4096       127.0.0.53%lo:53             0.0.0.0:*      users:(("systemd-resolve",pid=327488,fd=13))
-tcp    LISTEN  0       128              0.0.0.0:22             0.0.0.0:*      users:(("sshd",pid=81227,fd=3))
-
-```
-And Check if the firewall is not active.
-
-```bash
-$ sudo ufw status
-Status: inactive
-```
-
-### Firing a test from *curl* command
-The curl command to emulate the notification transmission.
-The data is any payload - intent was to test functionality. You can customer the content of the dictionary after "--data"
-> Test done from my Mac
-
-```bash
-[pnhan@PNHAN-M-1466 ~/Documents/Python/webhook]$ curl --insecure --user "username:password" --header "Content-Type: application/json" --request POST --data '{"Testing_Key":"Testing_Value"}' https://172.16.1.16:5443/webhook
-Webhook notification received%
-[pnhan@PNHAN-M-1466 ~/Documents/Python/webhook]$
-```
-> Meanwhile, on the Ubuntu VM it was running *flask_rx.py*. It received the notification from our curl command - Note the payload is displayed.
-
-```bash
-cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
- * Serving Flask app 'flask_rx' (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: on
- * Running on all addresses.
-   WARNING: This is a development server. Do not use it in a production deployment.
- * Running on https://172.16.1.16:5443/ (Press CTRL+C to quit)
- * Restarting with stat
- * Debugger is active!
- * Debugger PIN: 768-531-813
-Webhook Received
-Payload:
-{
-    "Testing_Key" : "Testing_Value"
-}
-172.16.1.20 - - [22/May/2021 21:10:23] "POST /webhook HTTP/1.1" 202 -
-```
-***
-### Firing a test from *test_webhook.py* command
-> Test done from my Mac but using the test_webhook.py - note it has some pre-defined payload
-
-```bash
-[pnhan@PNHAN-M-1466 ~/Documents/Python/webhook]$ python3 test_webhook.py
-Webhook notification status code:  202
-Webhook notification response:  Webhook notification received
-```
-> Meanwhile, on the Ubuntu VM it was running *flask_rx.py*. It received the notification from test_webhook.py - Note the payload is displayed.
-
-```bash
-cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
- * Serving Flask app 'flask_rx' (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: on
- * Running on all addresses.
-   WARNING: This is a development server. Do not use it in a production deployment.
- * Running on https://172.16.1.16:5443/ (Press CTRL+C to quit)
- * Restarting with stat
- * Debugger is active!
- * Debugger PIN: 768-531-813
-Webhook Received
-Payload:
-{
-    "version" : "" ,
-    "instanceId" : "ea6e28c5-b7f2-43a4-9937-def73771c5ef" ,
-    "eventId" : "NETWORK-NON-FABRIC_WIRED-1-251" ,
-    "namespace" : "ASSURANCE" ,
-    "name" : "" ,
-    "description" : "" ,
-    "type" : "NETWORK" ,
-    "category" : "ALERT" ,
-    "domain" : "Connectivity" ,
-    "subDomain" : "Non-Fabric Wired" ,
-    "severity" : 1 ,
-    "source" : "ndp" ,
-    "timestamp" : 1574457834497 ,
-    "tags" : "" ,
-    "details" : {
-        "Type" : "Network Device" ,
-        "Assurance Issue Priority" : "P1" ,
-        "Assurance Issue Details" : "Interface GigabitEthernet1/0/3 on the following network device is down: Local Node: PDX-M" ,
-        "Device" : "10.93.141.17" ,
-        "Assurance Issue Name" : "Interface GigabitEthernet1/0/3 is Down on Network Device 10.93.141.17" ,
-        "Assurance Issue Category" : "Connectivity" ,
-        "Assurance Issue Status" : "active"
-    } ,
-    "ciscoDnaEventLink" : "https://10.93.141.35/dna/assurance/issueDetails?issueId=ea6e28c5-b7f2-43a4-9937-def73771c5ef" ,
-    "note" : "To programmatically get more info see here - https://<ip-address>/dna/platform/app/consumer-portal/developer-toolkit/apis?apiId=8684-39bb-4e89-a6e4" ,
-    "tntId" : "" ,
-    "context" : "" ,
-    "tenantId" : ""
-}
-172.16.1.20 - - [22/May/2021 21:17:06] "POST /webhook HTTP/1.1" 202 -
-```
-***
-### Firing a test from *Cisco DNAC*
-
-Add the credential of the webhook. 
-
-[![](/assets/images/2021-05-20_webhook.jpg)](/assets/images/2021-05-20_webhook.jpg)
-
-{: .notice--info}
-<i class="fa fa-exclamation-triangle fa-2x fa-fw" style="color:yellow"></i> <b>Important:</b><br>
-Note the Authorization headers is a Base64 encoding of username:password. If you need help with the Base64 encoding - I have included *userpass_base64.py* to help.
-
-```shell
-[pnhan@PNHAN-M-1466 ~/Documents/Python/webhook]$ python3 userpass_base64.py
-Enter Username: username
-Enter Password: password
-username:password
-Encoded string: dXNlcm5hbWU6cGFzc3dvcmQ=
-Header for Basic Authentication
-Authorization Header value: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
-```
-
-Subscribe to a notification and "Try it"
-[![](/assets/images/2021-05-20_tryit.jpg)](/assets/images/2021-05-20_tryit.jpg)
-
-> Meanwhile, on the Ubuntu VM it was running *flask_rx.py*. It received the notification from Cisco DNAC - Note the payload is displayed.
-
-```shell
-cisco@ubuntu2:~/Python/webhook$ python3 flask_rx.py
- * Serving Flask app 'flask_rx' (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: on
- * Running on all addresses.
-   WARNING: This is a development server. Do not use it in a production deployment.
- * Running on https://172.16.1.16:5443/ (Press CTRL+C to quit)
- * Restarting with stat
- * Debugger is active!
- * Debugger PIN: 768-531-813
-Webhook Received
-Payload:
-{
-    "version" : "1.0.0" ,
-    "instanceId" : "1fbf834f-b1ca-42cc-a845-67ce410bea0b" ,
-    "eventId" : "NETWORK-DEVICES-3-210" ,
-    "namespace" : "ASSURANCE" ,
-    "name" : "Interface Flapping On Network Device" ,
-    "description" : "A port interface is flapping on a switch" ,
-    "type" : "NETWORK" ,
-    "category" : "WARN" ,
-    "domain" : "Know Your Network" ,
-    "subDomain" : "Devices" ,
-    "severity" : 3 ,
-    "source" : "EXTERNAL" ,
-    "timestamp" : 1621494721901 ,
-    "details" : {
-        "Type" : "" ,
-        "Assurance Issue Details" : "Switch  Interface  is flapping" ,
-        "Assurance Issue Priority" : "" ,
-        "Device" : "" ,
-        "Assurance Issue Name" : "Interface  is Flapping on Network Device " ,
-        "Assurance Issue Category" : "" ,
-        "Assurance Issue Status" : ""
-    } ,
-    "ciscoDnaEventLink" : "https://&lt;DNAC_IP_ADDRESS&gt;/dna/assurance/issueDetails?issueId=" ,
-    "note" : "To programmatically get more info see here - https://<ip-address>/dna/platform/app/consumer-portal/developer-toolkit/apis?apiId=8684-39bb-4e89-a6e4" ,
-    "context" : "EXTERNAL" ,
-    "userId" : null ,
-    "i18n" : null ,
-    "eventHierarchy" : null ,
-    "message" : null ,
-    "messageParams" : null ,
-    "parentInstanceId" : null ,
-    "network" : null
-}
-10.66.50.14 - - [20/May/2021 17:12:02] "POST /webhook HTTP/1.1" 202 -
-```
-***
 ### Summary
 Flask is pretty powerful, with just a few lines of code you can have a fully functioning web server.
 
