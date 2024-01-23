@@ -337,7 +337,7 @@ Creating flask-gunicorn-python-app ... done
 Creating nginx-app                 ... done
 ```
 
-<i class="fas fa-regular fa-star fa-2x fa-spin"></i> If you made changes to the app.py file after you kick off the docker-compose, and want to utilise the change, then do the following to stop the containers and clean up the image:
+<i class="fas fa-regular fa-star fa-2x fa-spin"></i> If you made changes to the app.py file after you kick off the docker-compose, and want to utilise the change. Then do the following to stop the containers and clean up the image before starting the containers again.
 
 ```
 > docker-compose down --rmi all
