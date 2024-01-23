@@ -189,6 +189,25 @@ The template uses a combination of CSS boostrap template and variable passed in 
 {% endraw %}
 {% endhighlight %}
 
+### Docker and config files break down
+
+
+Directory structure used:
+```bash
+.
+├── app.py
+├── dockerfile
+├── gunicorn_config.py
+├── requirements.txt
+├── static
+│   ├── CiscoLive-text.png
+│   └── favicon.ico
+└── templates
+    ├── ap_summary_client_count.html
+    ├── ap_summary_data_usage.html
+    ├── ap_summary.html
+    └── index.html
+```
 ***
 
 ### Summary
