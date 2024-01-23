@@ -354,9 +354,8 @@ Removing image nginx-app
 ***
 
 ### Summary
-Flask is pretty powerful, with just a few lines of code you can have a fully functioning web server.
-
-**Coming Up Next:** We will further explore ways of customising flask using template to get **Maximum Impact** with very little efforts. And we will continue the same theme of webhook but change the python code to show the content of the log file via the same Flask web service. 
+The similiar app can be adapted for many devices and different commands, just use the similiar frame work.
+Anyway have fun playing with it.
 
 Please reach out if you have any questions or comments.<br>
 
