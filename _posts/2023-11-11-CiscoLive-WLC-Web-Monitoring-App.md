@@ -50,7 +50,7 @@ Please Note: Image below has the AP name, IP address, and Mac address pixelated.
 [![](/assets/images/2023-11-11-AP-Summary.jpg)](/assets/images/2023-11-11-AP-Summary.jpg)
 
 
-Before we begin to break down the code (app.py)- you can grab a copy from  [GitHub - Flask webhook receiver](https://github.com/Peter-Nhan/Flask_webhook_receiver){: .btn .btn--primary} <br>
+Before we begin to break down the code (app.py)- you can grab a copy from  [GitHub - CiscoLive_WLC_Flask](https://github.com/Peter-Nhan/CiscoLive_WLC_Flask){: .btn .btn--primary} <br>
 
 ***
 ### Code break down
@@ -95,8 +95,8 @@ A number of flask route has been created. This determines how the Flask WSGI App
 | "/ap_sum_client" |  show ap summary sort descending client-count | show AP with most client |
 | "/ap_sum_data" | show ap summary sort descending data-usage | show AP with most data usage |
 
-Once the Flask WSGI APP see a request for a route it will trigger a called particular function. <br>
-For example if it receives a request for http://x.x.x.x:8081/ap_sum it will be routed to line 6 below. The App will collect and parse the "show ap summary" from the configured WLC, it will then pass the parse values to the template call 
+Once the Flask WSGI APP see a request for a route it will trigger a called particular function. <br><br>
+For example, if it receives a request for http://x.x.x.x:8081/ap_sum it will be routed to line 6 below. The App will collect and parse the "show ap summary" from the configured WLC, it will then pass the parse values to the template to be rendered.
 
 {% highlight python linenos %}
 @app.route('/')
@@ -146,7 +146,8 @@ def show_ap_summary():
 {% endhighlight %}
 
 ### Template break down
-The template uses a combination of CSS boostrap template and variable passed in from our app.py
+The template uses a combination of CSS boostrap template and variables (ap_details and total_ap) passed in from our app.py
+> Analysis of ap_summary.html 
 
 {% highlight html %}
 {% raw %}
@@ -190,24 +191,166 @@ The template uses a combination of CSS boostrap template and variable passed in 
 {% endhighlight %}
 
 ### Docker and config files break down
+The Github repo has the following file and directory structure.
+It is broken into two folders -
+* gunicorn-flask-python-app - contains all the flask/gunicorn/templates files as well as the main app.py file. It also has the dockerfile to build the image.
+* nginx - contains the nginx config file and dockerfile to build the image 
 
+docker-compose.yml on the top has the details for docker to spin up both containers.
 
 Directory structure used:
 ```bash
 .
-├── app.py
-├── dockerfile
-├── gunicorn_config.py
-├── requirements.txt
-├── static
-│   ├── CiscoLive-text.png
-│   └── favicon.ico
-└── templates
-    ├── ap_summary_client_count.html
-    ├── ap_summary_data_usage.html
-    ├── ap_summary.html
-    └── index.html
+├── docker-compose.yml
+├── gunicorn-flask-python-app
+│   ├── app.py
+│   ├── dockerfile
+│   ├── gunicorn_config.py
+│   ├── requirements.txt
+│   ├── static
+│   │   ├── CiscoLive-text.png
+│   │   └── favicon.ico
+│   └── templates
+│       ├── ap_summary_client_count.html
+│       ├── ap_summary_data_usage.html
+│       ├── ap_summary.html
+│       └── index.html
+└── nginx
+    ├── dockerfile
+    └── nginx.conf
+
+4 directories, 13 files
 ```
+<br><br>
+**Gunicorn Flask** 
+> Analysis of Gunicorn/Flask dockerfile 
+
+{% highlight dockerfile linenos %}
+# Python + Flask + Gunicorn
+FROM python:slim
+COPY requirements.txt /
+RUN pip3 install --upgrade pip
+RUN pip3 install -r /requirements.txt
+COPY . /app
+WORKDIR /app
+EXPOSE 8081
+CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:8081", "app:app"]
+{% endhighlight %}
+
+Gunicorn Flask image will be built based on python slim image, the app.py will be copy into the image and command gunicorn issue with IP address bounded to port 8081, and gunicorn will use the app.py file.
+
+**Nginx** 
+> Analysis of nginx.conf 
+
+{% highlight config linenos %}
+upstream flask_gunicorn {
+    server flask-gunicorn-python-app:8081;
+    # flask-gunicorn-python-app should match the container name in the docker compose file
+}
+
+server {
+
+    listen 80;
+    # nginx will run on port 80
+    # docker compose should map to 80 from outside - ports: "8088:80"
+
+    location / {
+        proxy_pass http://flask_gunicorn;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+    }
+}
+{% endhighlight %}
+
+Line 2 - nginx points to the flask-gunicorn-python-app container on port 8081 <br>
+Line 8 - nginx will listen on port 80 - I will use docker-compose file to map this to 8088 <br>
+line 13 - points to the upstream server that was defined in line 1 <br>
+
+{% highlight dockerfile linenos %}
+FROM nginx:latest
+
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d
+{% endhighlight %}
+
+Nginx image will be built from the nginx latest, and we remove the default config and used the config file that we just went through.
+<br><br>
+
+**Putting it all together**
+
+``` bash
+> ls
+docker-compose.yml  gunicorn-flask-python-app  nginx
+> docker-compose up -d --build
+Creating network "CiscoLive" with driver "bridge"
+Building flask
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  65.02kB
+Step 1/8 : FROM python:slim
+ ---> c7fb57790594
+Step 2/8 : COPY requirements.txt /
+ ---> Using cache
+ ---> 137ceec40163
+Step 3/8 : RUN pip3 install --upgrade pip
+ ---> Using cache
+ ---> 5562af3d2e2f
+Step 4/8 : RUN pip3 install -r /requirements.txt
+ ---> Using cache
+ ---> 00c652a77573
+Step 5/8 : COPY . /app
+ ---> e575d2224b76
+Step 6/8 : WORKDIR /app
+ ---> Running in bddfcad01138
+Removing intermediate container bddfcad01138
+ ---> b20e57eb5952
+Step 7/8 : EXPOSE 8081
+ ---> Running in 4190f2fea752
+Removing intermediate container 4190f2fea752
+ ---> 6d08da0fe87d
+Step 8/8 : CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:8081", "app:app"]
+ ---> Running in 82a06c669964
+Removing intermediate container 82a06c669964
+ ---> 207551f6c747
+Successfully built 207551f6c747
+Successfully tagged flask-gunicorn-python-app:latest
+Building nginx
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  3.072kB
+Step 1/3 : FROM nginx:latest
+ ---> a8758716bb6a
+Step 2/3 : RUN rm /etc/nginx/conf.d/default.conf
+ ---> Using cache
+ ---> 11f23ab98880
+Step 3/3 : COPY nginx.conf /etc/nginx/conf.d
+ ---> Using cache
+ ---> f709a55cb997
+Successfully built f709a55cb997
+Successfully tagged nginx-app:latest
+Creating flask-gunicorn-python-app ... done
+Creating nginx-app                 ... done
+```
+
+<i class="fas fa-regular fa-star fa-2x fa-spin"></i> If you made changes to the app.py file after you kick off the docker-compose, and want to utilise the change, then do the following to stop the containers and clean up the image:
+
+```
+> docker-compose down --rmi all
+Stopping flask-gunicorn-python-app ... done
+Stopping nginx-app                 ... done
+Removing flask-gunicorn-python-app ... done
+Removing nginx-app                 ... done
+Removing network CiscoLive
+Removing image flask-gunicorn-python-app
+Removing image nginx-app
+```
+
+
 ***
 
 ### Summary
@@ -216,4 +359,4 @@ Flask is pretty powerful, with just a few lines of code you can have a fully fun
 **Coming Up Next:** We will further explore ways of customising flask using template to get **Maximum Impact** with very little efforts. And we will continue the same theme of webhook but change the python code to show the content of the log file via the same Flask web service. 
 
 Please reach out if you have any questions or comments.<br>
-<i class="fas fa-ghost fa-2x fa-spin"></i>
+
