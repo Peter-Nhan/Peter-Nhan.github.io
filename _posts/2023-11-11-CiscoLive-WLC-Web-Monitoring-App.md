@@ -41,14 +41,16 @@ We then nicely package it all together with two docker containers:
 
 [![](/assets/images/2023-11-11-index.jpg)](/assets/images/2023-11-11-index.jpg)
 
-Most of the work is done within the Flask WSGI App by establishing an SSH session to the WLC using Netmiko Library. Depending on a web based query it would proceed to collect and parsing the following commands:
+Most of the work is done within the Flask WSGI App by establishing an SSH session to the WLC using Netmiko Library. Depending on which web query it would proceed to collect and parse the following command outputs:
 * show ap summary
 * show ap summary sort descending client-count
 * show ap summary sort descending data-usage
 
-Please Note: Image below has the AP name, IP address, and Mac address pixelated.
+<i class="fas fa-regular fa-star fa-2x fa-spin"></i> 
+Please Note: Images below has their AP name, IP address, and Mac address pixelated.
 
 [![](/assets/images/2023-11-11-AP-Summary.jpg)](/assets/images/2023-11-11-AP-Summary.jpg)
+[![](/assets/images/2023-11-11-AP-Most-Clients.jpg){:width="40%" }](/assets/images/2023-11-11-AP-Most-Clients.jpg)
 
 Before we begin to break down the code (app.py)- you can grab a copy from  [GitHub - CiscoLive_WLC_Flask](https://github.com/Peter-Nhan/CiscoLive_WLC_Flask){: .btn .btn--primary} <br>
 
@@ -58,7 +60,7 @@ Before we begin to break down the code (app.py)- you can grab a copy from  [GitH
 
 Python file *app.py* has some hardcoded username and password not best practice - this post was more about demonstrating functionality. These credentials are used by the netmiko to connect to the WLC.
 
-The function grab_cli_output collects show commands from the WLC.
+The function grab_cli_output collects show commands from the WLC and returns output to anouther function that called it.
 
 {% highlight python linenos %}
 from flask import Flask, render_template, send_from_directory
@@ -86,7 +88,7 @@ def grab_cli_output(cli):
 {% endhighlight %}
 
 
-A number of flask route has been created. This determines how the Flask WSGI App should treat the incoming request.
+A number of flask route has been created. This determines how the Flask WSGI App should treat the incoming http request.
 
 | Route | Command | Description |
 | :--- | :--- | :--- |
@@ -95,7 +97,7 @@ A number of flask route has been created. This determines how the Flask WSGI App
 | "/ap_sum_client" |  show ap summary sort descending client-count | show AP with most client |
 | "/ap_sum_data" | show ap summary sort descending data-usage | show AP with most data usage |
 
-Once the Flask WSGI APP see a request for a route it will trigger a called particular function. <br><br>
+Once the Flask WSGI APP recieves the request for a particular route it will trigger a called particular function. <br><br>
 For example, if it receives a request for http://x.x.x.x:8081/ap_sum it will be routed to line 6 below. The App will collect and parse the "show ap summary" from the configured WLC, it will then pass the parse values to the template to be rendered.
 
 {% highlight python linenos %}
@@ -191,14 +193,14 @@ The template uses a combination of CSS boostrap template and variables (ap_detai
 {% endhighlight %}
 
 ### Docker and config files break down
-The Github repo has the following file and directory structure.
+The Github repo - [GitHub - CiscoLive_WLC_Flask](https://github.com/Peter-Nhan/CiscoLive_WLC_Flask) has the following file and directory structure.
 It is broken into two folders -
 * gunicorn-flask-python-app - contains all the flask/gunicorn/templates files as well as the main app.py file. It also has the dockerfile to build the image.
 * nginx - contains the nginx config file and dockerfile to build the image 
 
 docker-compose.yml on the top has the details for docker to spin up both containers.
 
-Directory structure used:
+File and Directory structure:
 ```bash
 .
 ├── docker-compose.yml
@@ -237,7 +239,7 @@ EXPOSE 8081
 CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:8081", "app:app"]
 {% endhighlight %}
 
-Gunicorn Flask image will be built based on python slim image, the app.py will be copy into the image and command gunicorn issue with IP address bounded to port 8081, and gunicorn will use the app.py file.
+Gunicorn Flask image will be built based on python slim image, the app.py file will be copy into the image and the default CMD for gunicorn with IP address bounded to port 8081, will be applied to the app.py application.
 
 **Nginx** 
 > Analysis of nginx.conf 
@@ -278,6 +280,7 @@ Nginx image will be built from the nginx latest, and we remove the default confi
 <br><br>
 
 **Putting it all together**
+Use the following docker command below to start the build of the images and to bring up the containers.
 
 ``` bash
 > ls
