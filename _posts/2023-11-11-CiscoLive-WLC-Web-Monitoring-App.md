@@ -276,10 +276,9 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d
 {% endhighlight %}
 
-Nginx image will be built from the nginx latest, we remove the default config and willbe using the config file that we just went through.
-<br><br>
+Nginx image will be built from the nginx latest, we remove the default config and will be using the config file that we just went through.
 
-###Putting it all together
+### Putting it all together
 Use the following docker command below to start the build of the images and to bring up the containers.
 
 ``` bash
@@ -357,7 +356,7 @@ Removing image nginx-app
 ***
 
 ### Summary
-The similiar app can be adapted for many devices and different commands, just use the similiar frame work.
+This app can be adapted for many devices and different commands, just use the similiar frame work.
 Anyway have fun playing with it.
 
 Please reach out if you have any questions or comments.<br>
