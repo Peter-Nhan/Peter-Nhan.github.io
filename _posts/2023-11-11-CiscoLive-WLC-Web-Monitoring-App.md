@@ -38,7 +38,6 @@ We then nicely package it all together with two docker containers:
 
 [![](/assets/images/2023-11-11-Docker-HighLevel.png)](/assets/images/2023-11-11-Docker-HighLevel.png)
 
-[![](/assets/images/2023-11-11-index.jpg)](/assets/images/2023-11-11-index.jpg)
 
 Most of the work is done within the Flask WSGI App by establishing an SSH session to the WLC using Netmiko Library. Depending on the web query, it would proceed to collect and parse the following command outputs:
 * show ap summary
@@ -47,7 +46,7 @@ Most of the work is done within the Flask WSGI App by establishing an SSH sessio
 
 <i class="fas fa-regular fa-star fa-2x fa-spin"></i> 
 Please Note: Images below has their AP name, IP address, and Mac address pixelated.
-
+[![](/assets/images/2023-11-11-index.jpg)](/assets/images/2023-11-11-index.jpg)
 Some screenshots from mobile device in landscape and portrait mode.
 [![](/assets/images/2023-11-11-AP-Summary.jpg)](/assets/images/2023-11-11-AP-Summary.jpg)
 [![](/assets/images/2023-11-11-AP-Most-Clients.jpg){:width="40%" }](/assets/images/2023-11-11-AP-Most-Clients.jpg)
