@@ -34,14 +34,13 @@ In this blog, I will discuss the tool I had built to help us track Access Points
 
 We then nicely package it all together with two docker containers:
 * Gunicorn container - has Gunicorn with the Flask App. Exposes TCP/8081 
-* NGINX container - providing reverse proxy for the Gunicorn container. Exposes TCP/8088 but maps it to port 80 internally in the container.
-
+* NGINX container - providing reverse proxy for the Gunicorn container. Exposes TCP/8088 externally and maps it to port TCP/80 internally in the container.
 
 [![](/assets/images/2023-11-11-Docker-HighLevel.png)](/assets/images/2023-11-11-Docker-HighLevel.png)
 
 [![](/assets/images/2023-11-11-index.jpg)](/assets/images/2023-11-11-index.jpg)
 
-Most of the work is done within the Flask WSGI App by establishing an SSH session to the WLC using Netmiko Library. Depending on which web query it would proceed to collect and parse the following command outputs:
+Most of the work is done within the Flask WSGI App by establishing an SSH session to the WLC using Netmiko Library. Depending on the web query, it would proceed to collect and parse the following command outputs:
 * show ap summary
 * show ap summary sort descending client-count
 * show ap summary sort descending data-usage
@@ -49,10 +48,11 @@ Most of the work is done within the Flask WSGI App by establishing an SSH sessio
 <i class="fas fa-regular fa-star fa-2x fa-spin"></i> 
 Please Note: Images below has their AP name, IP address, and Mac address pixelated.
 
+Some screenshots from mobile device in landscape and portrait mode.
 [![](/assets/images/2023-11-11-AP-Summary.jpg)](/assets/images/2023-11-11-AP-Summary.jpg)
 [![](/assets/images/2023-11-11-AP-Most-Clients.jpg){:width="40%" }](/assets/images/2023-11-11-AP-Most-Clients.jpg)
 
-Before we begin to break down the code (app.py)- you can grab a copy from  [GitHub - CiscoLive_WLC_Flask](https://github.com/Peter-Nhan/CiscoLive_WLC_Flask){: .btn .btn--primary} <br>
+Before we begin to break down the code - you can grab a copy from  [GitHub - CiscoLive_WLC_Flask](https://github.com/Peter-Nhan/CiscoLive_WLC_Flask){: .btn .btn--primary} <br>
 
 ***
 ### Code break down
@@ -276,10 +276,10 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d
 {% endhighlight %}
 
-Nginx image will be built from the nginx latest, and we remove the default config and used the config file that we just went through.
+Nginx image will be built from the nginx latest, we remove the default config and willbe using the config file that we just went through.
 <br><br>
 
-**Putting it all together**
+###Putting it all together
 Use the following docker command below to start the build of the images and to bring up the containers.
 
 ``` bash
