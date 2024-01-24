@@ -21,34 +21,34 @@ During the recent Cisco Live Melbourne 2023. I was involved in the Cisco NOC (Ne
 
 We needed a tool to help track AP deployment from our phones, rather than connecting from our laptop to the WLC to check progress and perform health checks.
 
-In this blog, I will discuss the tool I had built to help us track Access Points deployment, and monitor the health of Wireless LAN controller. I wanted the ability to monitor things from our phones with data presented on a web pages that would auto-reload. 
+In this blog, I will discuss the tool I had built to help us track Access Points deployment, and monitor the health of Wireless LAN controller. The Flask App can be easily adapted for other purposes, as it present the information in a web page format.
 
 [![](/assets/images/2023-11-11_APs.jpg)](/assets/images/2023-11-11_APs.jpg)
 
 ***
 ### Items used
 * Python - was the work horse, I used it extract data from WLC (netmiko), then parse the data into list of dictionary - I made a textfsm version (probably next blog)
-* Flask Python class - Use to create our WSGI (Web Server Gateway Interface) application, which renders a dynamic web page - using static web page templates and the data extracted from the WLC.
-* Gunicorn - Flask should not be used alone in production environment since is a web framework and not a web server. Gunicorn takes the WSGI Application and translates HTTP requests into something Python can understand.
+* Flask Python class - Use to create our WSGI (Web Server Gateway Interface) application, which renders a dynamic web page - using templates and the data extracted from the WLC.
+* Gunicorn - Flask should not be used alone in production environment since it is a web framework and not a web server. Gunicorn takes the WSGI Application and present it as a web service.
 * NGINX -  public handler (reverse proxy) for incoming requests and scales to thousands of simultaneous connections.
 
-And then we nicely package it all together with two docker containers:
+We then nicely package it all together with two docker containers:
 * Gunicorn container - has Gunicorn with the Flask App. Exposes TCP/8081 
 * NGINX container - providing reverse proxy for the Gunicorn container. Exposes TCP/8088 but maps it to port 80 internally in the container.
 
 
 [![](/assets/images/2023-11-11-Docker-HighLevel.png)](/assets/images/2023-11-11-Docker-HighLevel.png)
 
-Most of the work is done within the Flask WSGI App by establishing an SSH session to the WLC using Netmiko Library. Based on a web based query it would proceed to collect and parsing the following commands:
+[![](/assets/images/2023-11-11-index.jpg)](/assets/images/2023-11-11-index.jpg)
+
+Most of the work is done within the Flask WSGI App by establishing an SSH session to the WLC using Netmiko Library. Depending on a web based query it would proceed to collect and parsing the following commands:
 * show ap summary
 * show ap summary sort descending client-count
 * show ap summary sort descending data-usage
-* show wlan all \| include Network Name \| Number of Active Clients
 
 Please Note: Image below has the AP name, IP address, and Mac address pixelated.
 
 [![](/assets/images/2023-11-11-AP-Summary.jpg)](/assets/images/2023-11-11-AP-Summary.jpg)
-
 
 Before we begin to break down the code (app.py)- you can grab a copy from  [GitHub - CiscoLive_WLC_Flask](https://github.com/Peter-Nhan/CiscoLive_WLC_Flask){: .btn .btn--primary} <br>
 
