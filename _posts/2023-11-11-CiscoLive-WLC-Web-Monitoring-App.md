@@ -12,7 +12,7 @@ toc: true
 toc_label: "Outline"
 toc_icon: "fa fa-spinner fa-spin"
 toc_sticky: True
-description: Exploring the power of Python Flask, we will use Python Flask to act as a Webhook Receive and we will test firing webhooks notification at it via curl, python code and Cisco DNAC. Source Code available on Github.
+description: Exploring the power of Python Flask, we will use Python Flask to act as a monitoring service. Flask route will trigger show commands on the WLC, and the output from the WLC will be parse to Flask. Source Code available on Github.
 categories: posts
 sitemap: true
 pkeywords: Python, Automation, Cisco, Devnet, Devops, Flask, nginx, Cisco, WLC
