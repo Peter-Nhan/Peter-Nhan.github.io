@@ -15,13 +15,12 @@ categories: posts
 sitemap: true
 pkeywords: docker, ollama, llm, python, langchain,
 ---
-One of the job perks is having access to great bunch of toys you can play and experiment with.
-For me to truly understand the hype behind AI, I needed to get my hands dirty and not just read or watch endless video about the topic.
-This is a blog is about running Local LLM with Ollama and Open WebUI, this way you can have your LLM privately and not on the cloud.
-This allows you leaverage AI without having to risk your personal details being shared or used by the cloud providers.
+One of the perks of my job is having access to hardware and software with which I can play and experiment. To truly understand the hype behind AI, I needed to get my hands dirty, not just read or watch endless videos on the topic.
+
+This blog post is about running a Local Large Language Model (LLM) with Ollama and Open WebUI. This way, you can have your LLM privately, not on the cloud. This allows you to leverage AI without risking your personal details being shared or used by cloud providers.
 
 Here is a quick outline:
-* Details about docker containers for Ollama (Server) and Ollama Web UI (front end).
+* Details about docker containers for Ollama (Platform/Server) and Ollama Web UI (front end).
 * Explore the guard rails, and bias.
 	* Asking the Meta's LLama LLM how to perform illegal activities on original censored LLM and uncensored LLM
 	* Asking the Alibaba's QWEN LLM about controversial topic that are sensitive within China due to strict government censorship.
