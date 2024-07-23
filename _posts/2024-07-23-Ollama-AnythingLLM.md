@@ -25,9 +25,8 @@ Here is a quick outline:
 * Details about docker containers for Ollama (Platform/Server) and AnythingLLM (front end/chat/uploading documents).
 * Explore:
 	* Embedding a news article about recent US political events and see how we it will do.
-    * Embedding LLM 
 	* Vector database (Lance DB) - you can spin chroma if you like, but Lance DB comes bundled with ANything LLM.
-
+  * Query the LLM about the news article and assess how well it did.
  A lot of the above is built into AnythingLLM.
 
 ***
@@ -126,7 +125,7 @@ My directory structure in the folder where docker compose exist. Create these fo
 └── webui
 ```
 
-Issue 'docker compose up -d' from the folder where your docker compose file are, to install and start the containers.
+Issue 'docker compose up -d' from the folder where your docker compose YAML file sits, to install and start the containers.
 Once the containers are up, you can browse to the AnythingLLM on port 3001 - example http://x.x.x.x:3001
 
 ### Check Anything LLM integration with Ollama
