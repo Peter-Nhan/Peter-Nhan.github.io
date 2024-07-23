@@ -24,7 +24,7 @@ Ollama - we introduce this in the last blog. We will use its ability to service 
 Here is a quick outline:
 * Details about docker containers for Ollama (Platform/Server) and AnythingLLM (front end/chat/uploading documents).
 * Explore:
-	* Embedding a news article about recent US political events and see how we it will do.
+	* Embedding a news article about recent US political events.
 	* Vector database (Lance DB) - you can spin chroma if you like, but Lance DB comes bundled with AnythingLLM.
   * Query the LLM about the news article and assess how well it did.
  A lot of the above is built into AnythingLLM.
