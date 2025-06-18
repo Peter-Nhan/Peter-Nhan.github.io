@@ -143,6 +143,7 @@ This will allow us to interact with Ollama Server through the Ollama App interfa
 
 The ollama app allows the user to interact with the selected model and allows for new LLM to be downloaded from the Ollama library.
 
+[![](/assets/images/2025-06-01-ollama-LLM-download.gif){: width="250" }](/assets/images/2025-06-01-ollama-LLM-download.gif){: width="250" }
 [![](/assets/images/2025-06-01-Termux-memory.jpg){: width="250" }](/assets/images/2025-06-01-Termux-memory.jpg){: width="250" }
 [![](/assets/images/2025-06-01-ollama-App.gif){: width="250" }](/assets/images/2025-06-01-ollama-App.gif){: width="250" }
 
